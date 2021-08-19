@@ -17,7 +17,7 @@
     * [Unit testing](developer-onboarding/sendgrid-mailer/unit-testing/001-unit-test-intro.md)
       * [SendgridController](developer-onboarding/sendgrid-mailer/unit-testing/unit-test-controller.md)
       * [SendgridHandler](developer-onboarding/sendgrid-mailer/unit-testing/unit-test-handler.md)
-      * [SendgridMailer](developer-onboarding/sendgrid-mailer/unit-testing/unit-test-handler.md)
+      * [SendgridMailer](developer-onboarding/sendgrid-mailer/unit-testing/unit-test-mailer.md)
     * [Higher-level testing](developer-onboarding/sendgrid-mailer/highlevel-testing/001-high-level-testing.md)
       * [integration testing](developer-onboarding/sendgrid-mailer/highlevel-testing/integration-testing.md)
       * [acceptance testing](developer-onboarding/sendgrid-mailer/highlevel-testing/acceptance-testing.md)
