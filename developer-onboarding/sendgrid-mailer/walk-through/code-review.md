@@ -1,0 +1,135 @@
+---
+description: >-
+  In this section we walk through the SendGrid microservice to get a bird's eye
+  view of the solution.  Later we'll add more tooling to the example
+---
+
+# Code Review
+
+## Overview of the solution
+
+We are going to start out with a simple spring boot microservice containing a rest controller and handler function for user requests, and a SendGridMailer class for transforming the user's request to a SendGrid request and sending to SendGrid.
+
+This microservice starts out with a REST controller that accepts a UserRequest and transforms it to a SendGrid Request, then sends the request to SendGrid
+
+![](../.gitbook/assets/sendgrid-personal-mailer%20(1).png)
+
+## Walkthrough
+
+The code for this microservice is a simple textbook REST service.  This is a simple blocking service so that we can explore a simpler paradigm.  Later we'll build a Webflux service when we build the Event Activity service.   Here's the basic outline of the solution:
+
+![](../../../.gitbook/assets/sendgrid-personal-controller-code.png)
+
+{% hint style="info" %}
+Get the code:  [https://github.com/tiny-engines-code/springboot-microservice-walkthrough.git](https://github.com/tiny-engines-code/springboot-microservice-walkthrough.git)
+{% endhint %}
+
+### SendGrid Controller
+
+Starting out with the controller -- it's a simple rest service that exposes a post endpoint that our users or programs can call. 
+
+{% code title="SendGridController.java" %}
+```java
+@PostMapping(path = "/send")
+public ResponseEntity<String> handleRequest(@RequestBody String mailRequest)  {
+    HttpHeaders responseHeaders = new HttpHeaders();
+    responseHeaders.set("Content-Type", "application/json");
+    
+    try {
+         String result =
+                    controllerFacade.requestHandler(mailRequest);
+        return ResponseEntity.ok()
+               .headers(responseHeaders)
+               .body(result);
+   } catch (Exception e) {
+            return ResponseEntity.badRequest()
+             .headers(responseHeaders)
+            .body(e.getLocalizedMessage());
+    }
+ }
+```
+{% endcode %}
+
+#### User Request
+
+This User request is a simplified json record with the basic requirements for sending emails.  Any additional information required to build a SendGrid request are stored as configurations 
+
+```javascript
+POST /email/v2/send HTTP/1.1
+Host: localhost:5000
+Content-Type: application/json
+Content-Length: 269
+
+{
+  "senderName": "me",
+  "fromAddress": "sender@gmail.com",
+  "toAddress": "receiver@gmail.com",
+  "subject": "This is my email",
+  "content": "Click here to create a click event: http://www.google.com",
+  "customArgs": {
+    "mycounter": 60000
+  }
+}
+```
+
+### SendGrid Mailer
+
+The SendGridMailer send\(\) method takes the user's request and:
+
+* [ ] Creates a SendGrid Mail object
+* [ ] Creates a SendGrid Request containing our new Mail object
+* [ ] Sends the Request to the SendGrid API
+* [ ] Receives a Response back
+
+{% code title="SendGridMailer.java" %}
+```java
+public Response send(SendgridRequest mailRequest) throws IOException {
+    
+    // Create a SendGrid Mail object
+    Mail mailer = createSendGridMail(mailRequest);
+
+    // Create a SendGrid Request
+    final Request request = new Request();
+    request.setMethod(Method.POST);
+    request.setEndpoint("/" + apiVersion + "/" + "mail/send");
+    request.setBody(mailer.build());
+    request.setBaseUri(this.host);
+    request.addHeader("User-Agent", "sendgrid/" + apiVersion + ";java");
+    request.addHeader("Authorization", "Bearer " + apiKeyValue);
+    request.addHeader("Accept", "application/json");
+
+    // Send to the SendGrid API
+    try {
+        return client.api(request);
+    } catch (Exception e) {
+        return new Response(HttpStatus.BAD_GATEWAY.value(), e.getMessage(), request.getHeaders());
+    }
+}
+
+```
+{% endcode %}
+
+#### SendGrid Response 
+
+SendGrid will respond with an httpStatus code and any message in the body.  It will aslo include a list of headers
+
+```java
+{
+  "statusCode": 202,
+  "body": "",
+  "headers": {
+    "Strict-Transport-Security": "max-age=600; includeSubDomains",
+    "Server": "nginx",
+    "Access-Control-Allow-Origin": "https://sendgrid.api-docs.io",
+    "Access-Control-Allow-Methods": "POST",
+    "Connection": "keep-alive",
+    "X-Message-Id": "tspnajLkRPKN_J6WgS-Dcg",
+    "X-No-CORS-Reason": "https://sendgrid.com/docs/Classroom/Basics/API/cors.html",
+    "Content-Length": "0",
+    "Access-Control-Max-Age": "600",
+    "Date": "Mon, 19 Jul 2021 14:31:23 GMT",
+    "Access-Control-Allow-Headers": "Authorization, Content-Type, On-behalf-of, x-sg-elas-acl"
+  }
+}
+```
+
