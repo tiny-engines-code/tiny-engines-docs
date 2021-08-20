@@ -3,11 +3,12 @@
 When unit testing any blocking function like the Sendgrid controller.   Simply put -- given a `unit under test` what are all the ways it can be changed and what are expected outcomes when tose changes occur?
 
 
-<div>
+
 <p/><li><strong>What is the "unit" under test?</strong></li>
 <div style="padding-left: 20px">
-<ul>
+
 <li><em>Usually a single method</em></li>
+
 </div>
 
 <p/><li><strong>What are the `inputs` to the unit?</strong></li>
@@ -25,7 +26,6 @@ When unit testing any blocking function like the Sendgrid controller.   Simply p
 </ul>
 </div>
 
-</div>
 
 
 ![](../../../.gitbook/assets/sendgrid-personal-page-6-1-.png)
