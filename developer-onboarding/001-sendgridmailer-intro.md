@@ -11,7 +11,21 @@ Each of us has followed a different path in building our coding skills - and hav
 
 In this onboarding project we'll cover the supporting disciplines that we need to take a software product to release. These are the disciplines that take software from an art to a product that people count on to "just work" 
 
+
+### What are we building?
 * A simple pipeline consisting of two micro-services, a client to the Twilio \(SendGrid\) email service, and a Kafka producer and consumer to ingest callback data from Twilio
+* Users at MyCompany can post email requests to the SendGridMailer service
+* The SendGridMailer sends a _Request_ to SendGrid, and receives a _Response_
+* SendGrid creates an _EventActivity_ record when the customer bounces, opens, or clicks
+* EventActivity records are sent to our EventActivity service
+* They are then published to a Kafka message broker
+* A Connector streams records out of Kafka and into a Database \(e.g. Snowflake, Athena, etc\)
+
+
+![](../.gitbook/assets/sendgrid-personal-sendgrid-pipeline.png)
+---
+
+### Components
 
 | componnt | name | description |  |  |
 | :--- | :--- | :--- | :--- | :--- |

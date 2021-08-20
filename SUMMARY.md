@@ -8,10 +8,10 @@
 ---
 
 * [Developer Onboarding](developer-onboarding/001-sendgridmailer-intro.md)
-  * [The Sendgrid Mailer](developer-onboarding/sendgrid-mailer/overview/what-are-we-building.md)
-    * [Walkthrough](developer-onboarding/001-sendgridmailer-intro.md)
-      * [SendGrid setup](developer-onboarding/sendgrid-mailer/overview/sendgrid-setup.md)
-      * [Running the Microservice](developer-onboarding/sendgrid-mailer/overview/running.md)
+  * [The Sendgrid Mailer](developer-onboarding/sendgrid-mailer/walk-through/what-are-we-building.md)
+    * [Walkthrough](developer-onboarding/sendgrid-mailer/walk-through/sendgrid-mailer-walkthrough.md)
+      * [SendGrid setup](developer-onboarding/sendgrid-mailer/walk-through/sendgrid-setup.md)
+      * [Running the Microservice](developer-onboarding/sendgrid-mailer/walk-through/running.md)
       * [Code Review](developer-onboarding/sendgrid-mailer/walk-through/code-review.md)
     * [Unit testing](developer-onboarding/sendgrid-mailer/unit-testing/001-unit-test-intro.md)
       * [SendgridController](developer-onboarding/sendgrid-mailer/unit-testing/unit-test-controller.md)
