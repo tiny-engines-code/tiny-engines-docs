@@ -4,18 +4,18 @@ When unit testing any blocking function like the Sendgrid controller.   Simply p
 
 
 <div>
-<p/><li><strong>What is the `unit" under test?</strong></li>
+<p/><li><strong>What is the "unit" under test?</strong></li>
 
 <p/><li><strong>What are the `inputs` to the unit?</strong></li>
 <div style="padding-left: 20px">
-<em>the input parameters that the unit is called with</em>
+<p/><em>the input parameters that the unit is called with</em>
 </div>
 <div style="padding-left: 20px">
-<em>any external input that the unit depends on</em>
+<p/><em>any external input that the unit depends on</em>
 </div>
 
 <p/><li><strong>What are the `outputs` from the unit?</strong></li>
 </div>
 
 
-![](../../../.gitbook/assets/sendgrid-personal-page-6-1-.png){: style="max-width: 200px; height: auto;"}
+![](../../../.gitbook/assets/sendgrid-personal-page-6-1-.png)
