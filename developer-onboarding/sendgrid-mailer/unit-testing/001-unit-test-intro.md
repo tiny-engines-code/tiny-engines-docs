@@ -4,10 +4,10 @@ When unit testing any blocking function like the Sendgrid controller.   Simply p
 
 
 
-<p/><li><strong>What is the "unit" under test?</strong></li>
-<span style="padding-left: 20px">
+<p/><strong>What is the "unit" under test?</strong>
+<div style="padding-left: 20px">
 - Usually a single method
-</span>
+</div>
 
 <p/><li><strong>What are the `inputs` to the unit?</strong></li>
 
