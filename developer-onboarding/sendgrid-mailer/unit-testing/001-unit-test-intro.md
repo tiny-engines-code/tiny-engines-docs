@@ -18,5 +18,4 @@ When unit testing any blocking function like the Sendgrid controller.   Simply p
 </div>
 
 
-
-![](../../../.gitbook/assets/sendgrid-personal-page-6-1-.png =100x200)
+![](../../../.gitbook/assets/sendgrid-personal-page-6-1-.png){: style="max-width: 200px; height: auto;"}
