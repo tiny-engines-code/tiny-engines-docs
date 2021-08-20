@@ -5,17 +5,17 @@ When unit testing any blocking function like the Sendgrid controller.   Simply p
 
 
 <p/><strong>What is the "unit" under test?</strong>
-<div style="padding-left: 20px">
+
 - Usually a single method
-</div>
 
-<p/><li><strong>What are the `inputs` to the unit?</strong></li>
 
-<div style="padding-left: 20px">
-<ul>
-<li><em>Identify the input parameters that the unit is called with</em></li>
-<li><em>Identify any external input that the unit depends on</em></li></ul>
-</div>
+<p/><strong>What are the `inputs` to the unit?</strong>
+
+[comment]: <> (<div style="padding-left: 20px">)
+* Identify the input parameters that the unit is called with
+* Identify any external input that the unit depends on
+
+[comment]: <> (</div>)
 
 <p/><li><strong>What are the `outputs` from the unit?</strong></li>
 <div style="padding-left: 20px">
