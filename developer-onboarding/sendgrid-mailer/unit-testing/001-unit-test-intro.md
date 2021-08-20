@@ -4,20 +4,20 @@ When unit testing any blocking function like the Sendgrid controller.   Simply p
 
 
 
-<p/><strong>What is the "unit" under test?</strong>
+<p/><strong>For each "function" under test</strong>
 
 * Usually a single method
 
 
-<p/><strong>What are the inputs to the unit?</strong>
+<p/><strong>What are the inputs to the function?</strong>
 
-* Identify the input parameters that the unit is called with
-* Identify any external input that the unit depends on
+* List the input parameters that the unit can be called with
+* List external inputs that the function depends on
 
 
-<p/><strong>What are the outputs from the unit?</strong>
+<p/><strong>What are the expected results?</strong>
 
-* Assert that we returned the appropriate response
+* For each set of inputs, what is the expected response?
 
 
 
