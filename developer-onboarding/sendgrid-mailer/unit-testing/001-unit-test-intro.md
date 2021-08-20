@@ -9,8 +9,10 @@ When unit testing any blocking function like the Sendgrid controller.   Simply p
 <p/><li><strong>What are the `inputs` to the unit?</strong></li>
 
 <div style="padding-left: 20px">
+<ul>
 <li><em>the input parameters that the unit is called with</em></li>
-<li><em>any external input that the unit depends on</em></li>
+<li><em>any external input that the unit depends on</em></li></ul>
+
 </div>
 
 <p/><li><strong>What are the `outputs` from the unit?</strong></li>
