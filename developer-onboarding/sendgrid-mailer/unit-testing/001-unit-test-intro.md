@@ -6,9 +6,7 @@ When unit testing any blocking function like the Sendgrid controller.   Simply p
 
 <p/><li><strong>What is the "unit" under test?</strong></li>
 <div style="padding-left: 20px">
-
-<li><em>Usually a single method</em></li>
-
+- Usually a single method
 </div>
 
 <p/><li><strong>What are the `inputs` to the unit?</strong></li>
