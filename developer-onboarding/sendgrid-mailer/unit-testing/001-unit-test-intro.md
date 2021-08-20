@@ -3,14 +3,20 @@
 When unit testing any blocking function like the Sendgrid controller.   Simply put -- given a `unit under test` what are all the ways it can be changed and what are expected outcomes when tose changes occur?
 
 
-<ul>
-<p/><li><strong>What is the `unit" under test?   This is usually a single work unit -- a method or a tightly dependent, small set of method.</strong></li>
+<div>
+<p/><li><strong>What is the `unit" under test?</strong></li>
+
 <p/><li><strong>What are the `inputs` to the unit?</strong></li>
-  <li>the input parameters that the unit is called with</li>
-  <li>any external input that the unit depends on</li>
+<div style="padding-left: 20px; display:block">
+<em>the input parameters that the unit is called with</em>
+</div>
+<div style="padding-left: 20px; display:block">
+<em>any external input that the unit depends on</em>
+</div>
+
 <p/><li><strong>What are the `outputs` from the unit?</strong></li>
-</ul>
+</div>
 
 
 
-![](../../../.gitbook/assets/sendgrid-personal-page-6-1-.png)
+![](../../../.gitbook/assets/sendgrid-personal-page-6-1-.png){:height="50px" width="50px"}.
