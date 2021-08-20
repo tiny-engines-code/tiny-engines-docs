@@ -23,6 +23,7 @@ In this onboarding project we'll cover the supporting disciplines that we need t
 
 
 ![](../.gitbook/assets/sendgrid-personal-sendgrid-pipeline.png)
+
 ---
 
 ### Components

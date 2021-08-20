@@ -7,8 +7,8 @@
 
 ---
 
-* [Developer Onboarding](developer-onboarding/001-sendgridmailer-intro.md)
-  * [The Sendgrid Mailer](developer-onboarding/sendgrid-mailer/walk-through/what-are-we-building.md)
+* [Developer Onboarding](developer-onboarding/001-onboarding-intro.md)
+  * [The Sendgrid Mailer](developer-onboarding/sendgrid-mailer/001-sendgrid-mailer-intro.md)
     * [Walkthrough](developer-onboarding/sendgrid-mailer/walk-through/sendgrid-mailer-walkthrough.md)
       * [SendGrid setup](developer-onboarding/sendgrid-mailer/walk-through/sendgrid-setup.md)
       * [Running the Microservice](developer-onboarding/sendgrid-mailer/walk-through/running.md)

@@ -1,4 +1,4 @@
-# The Sendgrid Mailer REST service
+# The Sendgrid Mailer REST service Walkthrough
 
 [TBH]
 
