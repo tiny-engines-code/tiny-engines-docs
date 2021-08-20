@@ -1,12 +1,10 @@
 ## Unit testing in general
 
-When unit testing any blocking function like the Sendgrid controller.   Simply put -- given a `unit under test` what are all the ways it can be changed and what are expected outcomes when tose changes occur?
-
-
+Effective unit testing starts with modular code design.  Of course that's much easier in a textbook example like this, but the really key functions should be able to define a simple set of inputs and the expected outputs for those inputs.  
 
 <p/><strong>For each "function" under test</strong>
 
-* Usually a single method
+* This is usually a single method
 
 
 <p/><strong>What are the inputs to the function?</strong>

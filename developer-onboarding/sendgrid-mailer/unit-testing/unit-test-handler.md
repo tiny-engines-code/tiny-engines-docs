@@ -4,18 +4,44 @@ description: Unit testing with Junit5
 
 # Unit testing the SendgridHandler
 
-The SendgridHandler.responseHandler\(\) takes a json string as its input and returns a Response object as its output.   It performs two testable functions:
 
-1. Json conversion - converts the json string to a SendgridRequest bean
-   1. handle good conversions
-   2. handle exceptions
-2. Handles the SendgridMailer.send\(\) return 
-   1. handle all status codes \(this is probably overkill\)
-   2. handles any exceptions
+The SendgridHandler:
 
+* [ ] Receives a JSON string from the SendgridController
+* [ ] Calls the .send() function of the SendgridMailer class
+* [ ] Returns a Sendgrid Response object as its response to the caller
+* [ ] Passes the Response object back to the SendgridController
+
+
+![](../../../.gitbook/assets/sendgrid-personal-handler.png)
+
+
+<p/><strong>he function accepts a JSON request bodyn</strong>
+
+* The **json** can be correct or incorrect
+* A "good" json string is converted to a SendgridRequest object
+
+
+<p/><strong>It calls the SendgridMailer program</strong>
+
+* It passes the SendgridRequest to the SendgridMailer.send() function
+
+
+
+<p/><strong>What kind of response could we possibly get back from SendgridMailer?</strong>
+
+* a Sendgrid Response object
+* a Runtime exception
+* a null Response object
+
+
+---
 #### Testing the json conversion
 
 We don't have many scenarios to cover.  The conversion will either fail or succeed for any number of reasons.   If it fails we want to return a BAD\_REQUEST.
+* Json conversion - converts the json string to a SendgridRequest bean
+   1. handle good conversions
+   2. handle exceptions
 
 ```java
 @Test
@@ -29,11 +55,15 @@ void test_handle_null_input_returns_400() throws Exception {
 }
 ```
 
-#### 
 
+---
 #### Testing the SendgridMailer response
 
 The repeatable pattern for all SendgridMailer returns is to mock the return we are trying to test, then test for the expected results.
+* Handle the SendgridMailer.send() responses
+   1. handle all status codes
+   2. handle any exceptions
+
 
 {% code title="example - handle a mailer exception" %}
 ```java
