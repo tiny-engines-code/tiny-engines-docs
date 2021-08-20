@@ -7,10 +7,10 @@ When unit testing any blocking function like the Sendgrid controller.   Simply p
 <p/><li><strong>What is the `unit" under test?</strong></li>
 
 <p/><li><strong>What are the `inputs` to the unit?</strong></li>
-<div style="padding-left: 20px; display:block">
+<div style="padding-left: 20px">
 <em>the input parameters that the unit is called with</em>
 </div>
-<div style="padding-left: 20px; display:block">
+<div style="padding-left: 20px">
 <em>any external input that the unit depends on</em>
 </div>
 
