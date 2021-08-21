@@ -2,7 +2,7 @@
 
 
 {% hint style="info" %}
-Github repo: [Github](https://https://github.com/tiny-engines-code/kafka-course-material)
+Code is stored at: [Github](https://github.com/tiny-engines-code/kafka-course-material)
 {% endhint %}
 
 ---
