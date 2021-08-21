@@ -1,39 +1,54 @@
 ---
 description: >-
   Software developers come from varied backgrounds. The purpose of this project
-  is to make sure that we are all starting out with the same understanding of
-  the software environment
+  is to create a baseline of the set of tools needed -- not just to write code, but to deliver it to a production environment
 ---
 
 # Onboarding
 
-Each of us has followed a different path in building our coding skills - and have different exposure to cross-cutting knowledge like code coverage, testing, sanity testing. 
+Each of us has followed a different path in building our coding skills. Generally most java developers I have worked with have an understanding of the language itself.   They understand the while, if, switch statements and how classes, streams and functions work.
+The purpose of this on-boarding is to walk-through the other things you need to know to deliver code into a production environment.  
 
-In this onboarding project we'll cover the supporting disciplines that we need to take a software product to release. These are the disciplines that take software from an art to a product that people count on to "just work" 
+In a production environment we are not just delivering software, but also deploying and running it.  That requires more than just understanding a language such as Java.  It requires understanding of the set of tools need to deliver that software.
+
+**This is not a Java tutorial.** and it's not a tutorial for Junit, Mockito, or any other specific skill.
+<p/>
+
+If you are in an environment were you can just develop code and hand that code off to a QA engineer and then a Dev-ops engineer -- that can be wonderful for a developer -- but more and more companies are building and maintaining thier own software and some of those companies are coming to the conclusion that strict boundaries between design, coding, QA and dev-ops are less and less efficient, and the separation between those roles is becoming more blurred.   Even if they weren't, a good working understanding of those other disciplines while designing and developing makes for much better solutions.
+
+The assumption is that the reader is already familiar with 
+* Java programming
+* Agile development
+
+Today we are concerned with "other" skills that come into play while delivering Java software.
+<p/>When designing a solution we need to be aware of
 
 
-### What are we building?
-* A simple pipeline consisting of two micro-services, a client to the Twilio \(SendGrid\) email service, and a Kafka producer and consumer to ingest callback data from Twilio
-* Users at MyCompany can post email requests to the SendGridMailer service
-* The SendGridMailer sends a _Request_ to SendGrid, and receives a _Response_
-* SendGrid creates an _EventActivity_ record when the customer bounces, opens, or clicks
-* EventActivity records are sent to our EventActivity service
-* They are then published to a Kafka message broker
-* A Connector streams records out of Kafka and into a Database \(e.g. Snowflake, Athena, etc\)
+  - **Observability - how will we trace and monitor the solution**
+    - monitoring - New Relic, SignalFX
+    - metering - dropwizard, ...
+    - a tracing solution - like Zipkin
+  - **Microservice ambassadors**
+    - discovery
+    - circuit breaker
+  - **Logging solution**
+    - logging tools like log4j are well known
+    - need a way to turn massive volume of logs into a central repository that can be queried and alerted
+      - Splunk, Elasticsearch, Lucene
+      - Log packaging Flume, Logstash
+  - **Error handing standard**
+  - **Configuration and secrets management**
+  - **Quality control**
+    - unit testing
+    - integration testing
+    - acceptance testing
+    - performance testing
+    - code quality such as lint, Jacoco, Sonarqube
+  - **Continuous integration and delivery**
+    - build tools such as Gitlab, Jenkins, Jenkins X
+    - deployment tools such as Terraform, Packer
+    - Production platforms such as AWS, GKE, or Azure
+    - Soft platforms such as Kubernetes
 
-
-![](../.gitbook/assets/sendgrid-personal-sendgrid-pipeline.png)
-
----
-
-### Components
-
-| componnt | name | description |  |  |
-| :--- | :--- | :--- | :--- | :--- |
-| **SendGridMailer** | springboot-microservice | We'll build a rest-service that listens for request to send email, then formats and sends to SendGrid |  |  |
-| **SendGrid** | n/a | An external service owned by Twilio that sends emails on behalf of its customers |  |  |
-| **EventActivity** | webhook-service | We'll also build a second rest-service that accepts callbacks from SendGrid, and sends them to Kafka.   SendGrid provides asynchronous information about how the customer interacted with the email |  |  |
-| **Confluent** | n/a | A high-volume message broker |  |  |
-| **Kafka Consumer** | Connector | There are many ways to get information from Kafka to a database.  In this example we'll store the data to parquet data on AWS S3 |  |  |
 
 

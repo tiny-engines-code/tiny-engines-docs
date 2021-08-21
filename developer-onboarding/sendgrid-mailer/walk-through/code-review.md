@@ -76,10 +76,10 @@ Content-Length: 269
 
 The SendGridMailer send\(\) method takes the user's request and:
 
-* [ ] Creates a SendGrid Mail object
-* [ ] Creates a SendGrid Request containing our new Mail object
-* [ ] Sends the Request to the SendGrid API
-* [ ] Receives a Response back
+* [x] Creates a SendGrid Mail object
+* [x] Creates a SendGrid Request containing our new Mail object
+* [x] Sends the Request to the SendGrid API
+* [x] Receives a Response back
 
 {% code title="SendGridMailer.java" %}
 ```java
