@@ -13,21 +13,24 @@
       * [SendGrid setup](developer-onboarding/sendgrid-mailer/walk-through/sendgrid-setup.md)
       * [Running the Microservice](developer-onboarding/sendgrid-mailer/walk-through/running.md)
       * [Code Review](developer-onboarding/sendgrid-mailer/walk-through/code-review.md)
-    * [Unit testing](developer-onboarding/sendgrid-mailer/testing/002-unit-test-intro.md)
-      * [SendgridController](developer-onboarding/sendgrid-mailer/testing/unit-test-controller.md)
-      * [SendgridHandler](developer-onboarding/sendgrid-mailer/testing/unit-test-handler.md)
-      * [SendgridMailer](developer-onboarding/sendgrid-mailer/testing/unit-test-mailer.md)
-    * [Higher-level testing](developer-onboarding/sendgrid-mailer/highlevel-testing/001-high-level-testing.md)
-      * [integration testing](developer-onboarding/sendgrid-mailer/highlevel-testing/integration-testing.md)
-      * [acceptance testing](developer-onboarding/sendgrid-mailer/highlevel-testing/acceptance-testing.md)
-      * [performance testing](developer-onboarding/sendgrid-mailer/highlevel-testing/performance-testing.md)
+    * [Testing](developer-onboarding/sendgrid-mailer/testing/001-testing-overview.md)
+      * [Unit Testing](developer-onboarding/sendgrid-mailer/testing/002-unit-test-intro.md)
+        * [SendgridController](developer-onboarding/sendgrid-mailer/testing/unit-test-controller.md)
+        * [SendgridHandler](developer-onboarding/sendgrid-mailer/testing/unit-test-handler.md)
+        * [SendgridMailer](developer-onboarding/sendgrid-mailer/testing/unit-test-mailer.md)
+      * [Integration testing](developer-onboarding/sendgrid-mailer/testing/003-integration-testing-overview.md)
+        * [Integration testing our service](developer-onboarding/sendgrid-mailer/testing/integration-testing.md)
+      * [Acceptance Testing](developer-onboarding/sendgrid-mailer/testing/acceptance-testing-intro.md)
+        * [Acceptance testing setup](developer-onboarding/sendgrid-mailer/testing/acceptance-setup.md)
+        * [Acceptance testing our service](developer-onboarding/sendgrid-mailer/testing/acceptance-testing.md)
+      * [Performance testing](developer-onboarding/sendgrid-mailer/highlevel-testing/performance-testing.md)
     * [Test validation](developer-onboarding/sendgrid-mailer/highlevel-testing/001-high-level-testing.md)
       * [mutation testing](developer-onboarding/sendgrid-mailer/test-validation/mutation-testing.md)
       * [test coverage](developer-onboarding/sendgrid-mailer/test-validation/code-coverage.md)
 * [Spark Streaming](spark-streaming/001-spark-intro.md)
 * [Kafka Walkthroughs](kafka-walkthroughs/001-kafka-intro.md)
 
-## Quick Hits
+
 
 ---
 
