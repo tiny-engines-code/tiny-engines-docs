@@ -8,15 +8,15 @@ Again, this is not a tutorial.  Although the code is available in Github I'm not
 
 ### What are we building?
 We are going to build a simple pipeline consisting of:
-* [x] A `SendgridMailer` REST service 
+* [x] A `SendgridMailer` REST service
 * [x] An `Event Activity` webhook listener
 * [x] A `Kafka` producer and consumer to ingest callback data from SendGrid
-* [x] A Connector that streams records out of Kafka and into an `AWS Athena` Database 
-* [x] A Pyspark "sweeper" utility that picks up Dead Letter data in AWS S3 and stores it into our AWS Athena Database
-
+* [x] A Connector that streams records out of Kafka and into an `AWS Athena` Database
 
 ![](../.gitbook/assets/sendgrid-personal-sendgrid-pipeline.png)
+* [x] A Pyspark "sweeper" utility that picks up Dead Letter data in AWS S3 and stores it into our AWS Athena Database
 
+---
 * The `SendgridMailer` REST service 
   * accepts a simple json request from the user
   * validates, format and send the request to the Twilio **SendGrid** email API

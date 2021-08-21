@@ -1,7 +1,6 @@
 # Table of contents
 
 * [Tiny Engines](README.md)
-* [Tiny rants](boneyard/tiny-rants.md)
 
 ## Projects <a id="sandbox"></a>
 

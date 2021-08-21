@@ -12,6 +12,8 @@ When we submit a request to SendGrid we get an immediate response that the reque
 * [x] The recipient opens the email (or not)
 * [x] The recipient clicks on any link that we've embedded in the email (or not)
 
+![](../../.gitbook/assets/event-activity.png)
+
 ###The service
 
 If we want to know what happened after we requested the email, we need to set up a REST gateway so that SendGrid can deliver those events asynchronously.
@@ -22,5 +24,4 @@ The `Event Activity` service can listen for these events and store the raw data 
 * [x] Explore testng the reactive router 
 * [x] Explore testing a message service client
 
-![](../../.gitbook/assets/event-activity.png)
 
