@@ -32,8 +32,14 @@
     * [Walk-through](developer-onboarding/event-activity/event-activity-code.md)
     * [Testing](common/under_contstruction.md)
   * [The Kafka Connector](developer-onboarding)
-* [Spark Streaming](spark-streaming/001-spark-intro.md)
-* [Kafka Walkthroughs](kafka-walkthroughs/001-kafka-intro.md)
+* [Walkthroughs](common/under_contstruction.md)
+  * [Spark Streaming](walkthroughs/ses-transform/ses-overview.md)
+    * [Goals](walkthroughs/ses-transform/ses-goals.md)
+    * [Logic](walkthroughs/ses-transform/pyspark-code.md)
+    * [Security](walkthroughs/ses-transform/security.md)
+    * [Goals](walkthroughs/ses-transform/ses-goals.md)
+    * 
+  * [Kafka Walkthroughs](kafka-walkthroughs/001-kafka-intro.md)
 
 
 

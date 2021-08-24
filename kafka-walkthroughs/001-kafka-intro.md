@@ -59,7 +59,7 @@ Quickly walk through the executor thread setup - the important takeaway here is 
 
 * IConfluentect the threaded producer
 
-* ![](../.gitbook/assets/05-hello-perf.png)
+![](../.gitbook/assets/05-hello-perf.png)
 
 ---
 ###06-hello-avro
