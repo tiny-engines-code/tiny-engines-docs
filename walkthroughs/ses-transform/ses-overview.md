@@ -14,6 +14,7 @@ Schema are expressed as Apache Spark Datasets with examples provided.
 SES customers can receive events records for each event that a recipient might generate.
 
 ![](../../.gitbook/assets/pyspark/ses-flow.png)
+
 ---
 * [x] Configure SES to push all activity to Kinesis Firehose delivery streams
   * each event class (e.g. delivery, bounce) requires a different stream

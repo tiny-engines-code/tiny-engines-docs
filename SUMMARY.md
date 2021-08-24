@@ -33,12 +33,10 @@
     * [Testing](common/under_contstruction.md)
   * [The Kafka Connector](developer-onboarding)
 * [Walkthroughs](common/under_contstruction.md)
-  * [Spark Streaming](walkthroughs/ses-transform/ses-overview.md)
-    * [Goals](walkthroughs/ses-transform/ses-goals.md)
+  * [Spark Streaming](walkthroughs/ses-transform/ses-goals.md)
+    * [The Solution](walkthroughs/ses-transform/ses-overview.md)
     * [Logic](walkthroughs/ses-transform/pyspark-code.md)
     * [Security](walkthroughs/ses-transform/security.md)
-    * [Goals](walkthroughs/ses-transform/ses-goals.md)
-    * 
   * [Kafka Walkthroughs](kafka-walkthroughs/001-kafka-intro.md)
 
 
