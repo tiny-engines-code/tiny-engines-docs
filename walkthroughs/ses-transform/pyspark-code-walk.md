@@ -1,41 +1,8 @@
 
+{% hint style="info" %}
+Read the code [HERE](https://github.com/tiny-engines-code/s3-spark-transform)
+{% endhint %}
 
-##Project
-The 
-
-```text
-
-├── input                           --- test files
-│   ├── bounce
-│   │   └── bounce.json
-│   ├── click
-│   │   └── click.json
-│   ├── complaint
-│   │   └── complaint.json
-│   ├── delivery
-│   │   └── delivery.json
-│   ├── open
-│   │   └── open.json
-│   ├── reject
-│   │   └── reject.json
-│   └── send
-│       └── send.json
-│
-├── sql                            --- sql to create pivot
-│   ├── 01-mock_request_data.sql
-│   ├── 02_pivot_base.sql
-│   ├── 03_ses_pivot.sql
-│   └── 04_join_pivot.sql
-│
-├── src                            --- pyspark code
-   ├── main.py                             -- main
-   ├── readers.py                          -- read and process files
-   ├── transformer.py                      -- perform transformations
-   └── writers.py                          -- write to jdbc, batch and stream writers
-
-
-
-```
 ##Code
 This is a quick walk-through of the basic logic for the Simple Email Service (SES) event processor. It's a textbook implementation with the basic structure of the solution and some code to prove out the concepts.
 A production implementation will include error handling, logging, security deployments, etc. but this is a good place to start to understand what we are building.

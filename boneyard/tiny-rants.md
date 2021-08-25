@@ -3,6 +3,18 @@ description: >-
   A boneyard of rants while documenting .. maybe articles or maybe they'll look
   terrible tomorrow
 ---
+# if's and loops and other sorrows
+If programming was really about how to code the logic to perform a task -- then any project manage could do it -- you would not need engineers
+* [x] tuning
+* [x] scaling
+* [x] deploying
+* [x] quality control
+* [x] monitoring
+* [x] security
+* [x] error handling
+* [x] logging, metrics nd observability
+
+
 
 # Tiny rants
 

@@ -35,7 +35,7 @@
 * [Walkthroughs](common/under_contstruction.md)
   * [Spark Streaming](walkthroughs/ses-transform/ses-goals.md)
     * [The Solution](walkthroughs/ses-transform/ses-overview.md)
-    * [Logic](walkthroughs/ses-transform/pyspark-code.md)
+    * [Logic](walkthroughs/ses-transform/pyspark-code-project.md)
     * [Security](walkthroughs/ses-transform/security.md)
   * [Kafka Walkthroughs](kafka-walkthroughs/001-kafka-intro.md)
 
