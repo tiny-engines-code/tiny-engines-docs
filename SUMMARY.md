@@ -29,6 +29,7 @@
       * [mutation testing](developer-onboarding/sendgrid-mailer/test-validation/mutation-testing.md)
       * [test coverage](developer-onboarding/sendgrid-mailer/test-validation/code-coverage.md)
   * [The Event Activity Service](developer-onboarding/event-activity/001-event-activity-intro.md)
+    * [Setup](developer-onboarding/event-activity/event-activity-setup.md)
     * [Walk-through](developer-onboarding/event-activity/event-activity-code.md)
     * [Testing](common/under_contstruction.md)
   * [The Kafka Connector](developer-onboarding)
