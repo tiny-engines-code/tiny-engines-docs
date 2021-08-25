@@ -12,15 +12,15 @@ We can always deploy a public facing gateway and a Confluent Kafka broker, but w
 ####Steps
 
 * [ ] Download and install the wonderful **ngrok** proxy
-* [ ] In the project root directory type docker-compose up - to start Kafka and Kowl (Kowl is a Kafka UI)
-* [ ] Start up our event activity service listening on port 5000 (in this example)
+* [ ] In the project root directory type **docker-compose up** - to start Kafka and Kowl (Kowl is a Kafka UI)
+* [ ] Start up our **event activity** service listening on port 5000 (in this example)
 * [ ] Start up the ngrok proxy and get the proxy IP address
-* [ ] Log into SendGrid and configure the Sendgrid `webhook` to send event data to our ngrok proxy
-* [ ] Send some emails to ourselves -- use our SendgridMailer service or manually create an email in SendGrid
+* [ ] Log into **SendGrid** and configure the Sendgrid `webhook` to send event data to our ngrok proxy
+* [ ] Send some emails to ourselves -- use our **SendgridMailer** service or manually create an email in SendGrid
 * [ ] Your email body should have a clickable link, so you can "click' on it when you get the email
-* [ ] once you have received the email, log into Kafka to see the event activity
-  * Open the Kafka UI (Kowl) at localhost:8080
-  * review the `sendgrid_events` topic
+* [ ] once you have received the email, log into **Kowl** at localhost:8080 to see the event activity
+  * Kowl is a wonderful UI that lets us view our topics in Kafka
+  * review the **sendgrid_events** topic
   * You should see the following records
     * processed
     * opened
@@ -58,6 +58,4 @@ Connections                   ttl     opn     rt1     rt5     p50     p90
                               0       0       0.00    0.00    0.00    0.00
 ```
 
-
-
-in the example above ngrok is proxying public ip http://78e3-73-96-191-223.ngrok.io to our local event activit listener.
+in the example above ngrok is proxying public ip http://78e3-73-96-191-223.ngrok.io to our local event activity listener.
