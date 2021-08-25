@@ -1,11 +1,15 @@
 
 
 ##Running the code on a laptop
+In order to run the solution without mocks we have two dependencies:
+* [x] Provide Sendgrid with a public IP address that it can send event activity to -- we'll use `ngrok` for this
+* [x] Provide a Kafka broker to send our data to -- we'll use docker for this
+
+We can always deploy a public facing gateway and a Confluent Kafka broker, but when developing it's sometimes helpful to be able to run from our laptops.  I'll focus on running from a laptop in this example.
 
 ---
 
 ####Steps
-We need to provide SendGrid with a public IP address.   We can deploy the event activity service on a publicly available platform, but when developing it's sometimes helpful to be able to run from our laptops.  The steps for doing that are:
 
 * [ ] Download and install the wonderful **ngrok** proxy
 * [ ] In the project root directory type docker-compose up - to start Kafka and Kowl (Kowl is a Kafka UI)
@@ -35,9 +39,9 @@ We need to provide SendGrid with a public IP address.   We can deploy the event 
 }
 ```
 ---
-#### Using ngrok
+####Using ngrok
 
-prompt> **npx ngrok http 5000**
+`prompt>` npx ngrok http 5000
 
 ```shell
 ngrok by @inconshreveable                                                                                                                                                                                                                           (Ctrl+C to quit)
