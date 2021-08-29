@@ -72,6 +72,36 @@ Content-Length: 269
 }
 ```
 
+### SendGrid Handler
+
+The handler function is just a pass-through - it's only function is to convert from a json string to a `SendgridRequest` Object and to provide a final catch for any errant runtime exceptions.
+The design paradigm is that everything returning to the caller is in the form of a valid `Response` object.
+
+```java 
+    public Response requestHandler(String jsonString) throws IOException {
+        try {
+            //---convert json ----
+            SendgridRequest mailRequest = objectMapper.readValue(jsonString, SendgridRequest.class);
+
+            //--- pass to Sendgrigmailr
+            var response  =  sendGridMailer.send(mailRequest);
+
+            // ---- handle bad response and return ---
+            if (response == null)
+                throw new NullPointerException("mailer returned unexpected null");
+            return  response;
+        } catch (JsonProcessingException |  IllegalArgumentException ex) {
+            return new Response(HttpStatus.BAD_REQUEST.value(), ex.getMessage(),
+                    Map.of("Content-type", "application/json", "X-Source", "json-format"));
+        }  catch (Exception ex) {
+            return new Response(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage(),
+                    Map.of("Content-type", "application/json", "X-Source", "application-error"));
+        }
+    }
+
+
+```
+
 ### SendGrid Mailer
 
 The SendGridMailer send\(\) method takes the user's request and:
