@@ -24,7 +24,7 @@ https://docs.sendgrid.com/ui/account-and-settings/api-keys
 
 Log into your SendGrid account and add the API key per the instructions provided there
 
-![](../../../.gitbook/assets/sendgrid-personal-page-3.png)
+![](../.gitbook/assets/sendgrid-personal-page-3.png)
 
 {% page-ref page="untitled-7.md" %}
 

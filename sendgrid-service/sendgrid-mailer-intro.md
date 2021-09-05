@@ -23,7 +23,7 @@ Our first service is a basic blocking spring boot java rest service that receive
 * [x] Make sure that any exception or edge case is captured and the user always sees an appropriate Response
 
 
-![](../../.gitbook/assets/mailer-overview.png)
+![](../.gitbook/assets/mailer-overview.png)
 
 ---
 

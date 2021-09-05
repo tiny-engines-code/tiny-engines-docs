@@ -8,8 +8,9 @@
 ---
 
 * [Developer Onboarding](developer-onboarding/001-onboarding-intro.md)
+  * [motivation](sendgrid-service/sendgrid-mailer-intro.md)
 * [mailer service]
-  * [the project](sendgrid-service/sendgrid-mailer-intro.md)
+  * [the project](developer-onboarding/the-project.md)
   * [setup](sendgrid-service/sendgrid-setup.md)
   * [running](sendgrid-service/running.md)
   * [code review](sendgrid-service/code-review.md)
