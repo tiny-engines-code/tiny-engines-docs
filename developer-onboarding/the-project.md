@@ -3,6 +3,7 @@ description: >-
   We'll use a simple textbook solution to illustrate some of the components of a complete production deliverable.
 ---
 ![](../.gitbook/assets/sendgrid-personal-sendgrid-pipeline.png)
+
 ---
 
 ### What are we building?
