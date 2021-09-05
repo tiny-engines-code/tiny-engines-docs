@@ -9,13 +9,13 @@
 
 * [Developer Onboarding](developer-onboarding/001-onboarding-intro.md)
   * [motivation](sendgrid-service/sendgrid-mailer-intro.md)
-* [mailer service]
-  * [the project](developer-onboarding/the-project.md)
+
+* [the mailer service](developer-onboarding/the-project.md)
   * [setup](sendgrid-service/sendgrid-setup.md)
   * [running](sendgrid-service/running.md)
   * [code review](sendgrid-service/code-review.md)
   * [Testing](sendgrid-service/testing/001-testing-overview.md)
-  * [Unit Testing](sendgrid-service/testing/002-unit-test-intro.md)
+  * [unit testing](sendgrid-service/testing/002-unit-test-intro.md)
   * [testing the controller](sendgrid-service/testing/unit-test-controller.md)
   * [testing the handler](sendgrid-service/testing/unit-test-handler.md)
   * [testing the mailer](sendgrid-service/testing/unit-test-mailer.md)
