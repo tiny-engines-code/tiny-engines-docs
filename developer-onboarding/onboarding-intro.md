@@ -17,7 +17,7 @@ At east once a month some well-meaning stakeholder who has some experience with 
 
 And they are often right -- because often it's not coding logic that soaks up the time ... it's everything else  ... and becoming efficient at that "everything else" is where a team can often gain efficiency and quality.
 
-For many of you this should be common knowledge or just a review.  But it's "ok" to take a little time to sync with one another on how we approach subjects such as: 
+For many of you this should be common knowledge or just a review.  But it's still "ok" to take a little time to sync with one another on how we approach subjects such as: 
 
   - **Observability - how we trace and monitor the solution**
     - monitoring - New Relic, SignalFX
