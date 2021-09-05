@@ -18,4 +18,4 @@ Effective unit testing starts with modular code design.  Of course that's much e
 * For each set of inputs, what is the expected response?
 
 
-![](../../../.gitbook/assets/sendgrid-personal-page-6-1-.png)
+![](../../.gitbook/assets/sendgrid-personal-page-6-1-.png)

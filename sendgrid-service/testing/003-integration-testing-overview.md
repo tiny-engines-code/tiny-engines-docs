@@ -25,7 +25,7 @@ At the time of writing, the Junit5 / Wiremock integration is a little tricky - s
 * [x] For this example the http client is also supplied by SendGrid (although we could inject our own)
 * [x] The http client makes the remote call to the SendGrid API
 
-![](../../../.gitbook/assets/flow2-API.png)
+![](../../.gitbook/assets/flow2-API.png)
 
 ---
 ####Unit test view
@@ -33,7 +33,7 @@ When we were unit testing we tested all the components ***individually***.  Piec
 
 So at the last step - we replaced the SendGrid Client with Mockito mock of the Client and -- under the covers -- our mock was called instead of the Client  
 
-![](../../../.gitbook/assets/unittest-mock.png)
+![](../../.gitbook/assets/unittest-mock.png)
 
 ---
 ####Integration view
@@ -41,5 +41,5 @@ Now we want to test all our components together as a whole, and cover as much of
 
 So we use Wiremock to "mock" the SendGrid API.  Wiremock provides the capability to return anything th SendGrid API might return without having to set up each specific scenario.  And we won't ever accidentally call the real API and send an email.
 
-![](../../../.gitbook/assets/flow2-wiremock.png)
+![](../../.gitbook/assets/flow2-wiremock.png)
 

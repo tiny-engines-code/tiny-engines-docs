@@ -11,7 +11,7 @@ The SendgridController:
 * [ ] Returns a status code as its response to the caller
 
 
-![](../../../.gitbook/assets/sendgrid-personal-controller.png)
+![](../../.gitbook/assets/sendgrid-personal-controller.png)
 
 
 <p/><strong>The function "function" under test is a POST /send request</strong>

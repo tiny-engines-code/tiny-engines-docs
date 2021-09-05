@@ -13,7 +13,7 @@ The SendgridHandler:
 * [ ] Passes the Response object back to the SendgridController
 
 
-![](../../../.gitbook/assets/sendgrid-personal-handler.png)
+![](../../.gitbook/assets/sendgrid-personal-handler.png)
 
 
 <p/><strong>he function accepts a JSON request bodyn</strong>

@@ -15,4 +15,4 @@ As usual, the code is here: [Get the code](https://github.com/tiny-engines-code/
 
 The test directory of this project contains sample code for unit-tests, integration test and acceptance tests:
 
-![](../../../.gitbook/assets/testing-directories.png)
+![](../../.gitbook/assets/testing-directories.png)

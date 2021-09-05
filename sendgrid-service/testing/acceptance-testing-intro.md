@@ -32,7 +32,7 @@ Scenario: Happy path email delivery
 
 Cucumber scenarios are stored in files with the .feature extension.  Cucumber wires these statements to the code that implements the actual transitions using Java, Junit, any and all the tools we've used so far.
 
-![](../../../.gitbook/assets/feature-method.png)
+![](../../.gitbook/assets/feature-method.png)
 
 ```
 Feature: Sendgrid acceptance test example
@@ -58,4 +58,4 @@ Feature: Sendgrid acceptance test example
 Once Cucumber has been configured properly then it can be run from gradle or directly from the Cucumber feature file.
 
 
-![](../../../.gitbook/assets/run-cucumber.png)
+![](../../.gitbook/assets/run-cucumber.png)

@@ -41,7 +41,7 @@ To support Junit5 and Cucumber as of the date of this walk-through we separate o
 * [x] create the feature file (mailer.feature)
 * [x] create the supporting test cases
 
-![](../../../.gitbook/assets/run-cucumber.png)
+![](../../.gitbook/assets/run-cucumber.png)
 
 * [x] create a runner class (RunCucumber) annotated with the @Cucumber annotation
 
