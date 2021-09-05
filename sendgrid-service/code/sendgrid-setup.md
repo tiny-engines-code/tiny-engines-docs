@@ -1,6 +1,5 @@
-# SendGrid setup
 
-## Getting SendGrid
+### Getting SendGrid
 
 We'll be using Twilio's Sendgrid application as one of our 'external' services.  SendGrid is a good choice for this because it has a free tier, and a well-documented an API that we'll call.  
 
