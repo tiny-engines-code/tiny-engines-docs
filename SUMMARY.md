@@ -7,13 +7,13 @@
 
 ---
 
-* [Developer Onboarding](developer-onboarding/001-onboarding-intro.md)
-  * [motivation](sendgrid-service/sendgrid-mailer-intro.md)
+* [developer onboarding](developer-onboarding/onboarding-intro.md)
+  * [motivation](developer-onboarding/onboarding-intro.md)
 
 * [the mailer service](developer-onboarding/the-project.md)
-  * [setup](sendgrid-service/sendgrid-setup.md)
-  * [running](sendgrid-service/running.md)
-  * [code review](sendgrid-service/code-review.md)
+  * [setup](sendgrid-service/code/sendgrid-setup.md)
+  * [running](sendgrid-service/code/running.md)
+  * [code review](sendgrid-service/code/code-review.md)
   * [unit testing](sendgrid-service/testing/002-unit-test-intro.md)
   * [testing the controller](sendgrid-service/testing/unit-test-controller.md)
   * [testing the handler](sendgrid-service/testing/unit-test-handler.md)
