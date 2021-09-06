@@ -8,7 +8,7 @@ description: >-
 
 We are going to start out with a simple spring boot microservice containing a rest controller and handler function for user requests, and a SendGridMailer class for transforming the user's request to a SendGrid request and sending to SendGrid.
 
-![](../../.gitbook/assets/sendgrid-personal-mailer%20(1).png)
+![](../../.gitbook/assets/sendgrid-personal-mailer.png)
 
 #### Walkthrough
 
