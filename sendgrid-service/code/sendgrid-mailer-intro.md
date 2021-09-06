@@ -1,16 +1,9 @@
-# The Sendgrid mailer service
 
-{% hint style="info" %}
-Get the code at: [Github](https://github.com/tiny-engines-code/springboot-microservice-walkthrough)
-{% endhint %}
 
-### What is in this section
-We'll cover our first service in this section.  We'll provide a quick overview of the service in this page, then dive in the following sections:
 
-* [x] code walk-through
-* [x] unit testing
-* [x] high-level testing, such as integration and acceptance testing
-* [x] code quality
+![](../../.gitbook/assets/sendgrid-mailer.png)
+
+
 
 ---
 ### High level design
@@ -23,7 +16,7 @@ Our first service is a basic blocking spring boot java rest service that receive
 * [x] Make sure that any exception or edge case is captured and the user always sees an appropriate Response
 
 
-![](../.gitbook/assets/mailer-overview.png)
+![](../../.gitbook/assets/mailer-overview.png)
 
 ---
 

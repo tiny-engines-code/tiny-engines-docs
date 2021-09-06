@@ -3,12 +3,13 @@
 * [Tiny Engines](README.md)
 
 
-## Projects <a id="sandbox"></a>
+### Onboarding Project <a id="sandbox"></a>
 
 ---
 
-* [developer onboarding](developer-onboarding/onboarding-intro.md)
-* [onboarding part1](developer-onboarding/the-project.md)
+* [motivation](developer-onboarding/onboarding-intro.md)
+* [the project](developer-onboarding/the-project.md)
+* [the sendgrid mailer](sendgrid-service/code/sendgrid-mailer-intro.md)
   * [setup](sendgrid-service/code/sendgrid-setup.md)
   * [code review](sendgrid-service/code/code-review.md)
   * [unit testing](sendgrid-service/testing/002-unit-test-intro.md)
@@ -26,14 +27,15 @@
   * [Walk-through](developer-onboarding/event-activity/event-activity-code.md)
   * [Testing](common/under_contstruction.md)
 * [The Kafka Connector](developer-onboarding)
-* [Walkthroughs](common/under_contstruction.md)
-  * [Spark Streaming](walkthroughs/ses-transform/ses-goals.md)
-    * [The Solution](walkthroughs/ses-transform/ses-overview.md)
-    * [Logic](walkthroughs/ses-transform/pyspark-code-project.md)
-    * [Security](walkthroughs/ses-transform/security.md)
-  * [Kafka Walkthroughs](kafka-walkthroughs/001-kafka-intro.md)
 
 
 
 ---
 
+### Walkthroughs
+
+* [Spark Streaming](walkthroughs/ses-transform/ses-goals.md)
+  * [The Solution](walkthroughs/ses-transform/ses-overview.md)
+  * [Logic](walkthroughs/ses-transform/pyspark-code-project.md)
+  * [Security](walkthroughs/ses-transform/security.md)
+* [Kafka Walkthroughs](kafka-walkthroughs/001-kafka-intro.md)
