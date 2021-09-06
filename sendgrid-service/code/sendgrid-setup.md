@@ -1,7 +1,6 @@
 ---
 description: >-
-We'll be using Twilio's Sendgrid application as our 'external' client and service.  
-
+We'll be using Twilio's Sendgrid application as our 'external' client and service.
 ---
 
 ### Getting SendGrid
