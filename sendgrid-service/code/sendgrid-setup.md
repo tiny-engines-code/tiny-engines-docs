@@ -20,6 +20,8 @@ In order to run the code for ourselves we need to
 * [ ] export the API key property as **sendgrid.auth.key**
 * [ ] be able to use Postman or curl to send a user request
 
+---
+
 ####Create a SendGrid account
 Create a new account by visiting the SendGrid site and signing up.  We won't spend a lot of time setting up the account - the instructions provided by SendGrid are easy to understand. 
 
@@ -31,6 +33,7 @@ https://docs.sendgrid.com/
  Read the excellent SendGrid documentation to get your account set up
 {% endhint %}
 
+---
 
 ####Create an API key
 Once we've created our account we'll need to create the API key that we'll use to authenticate with SendGrid.  This process is documented in the docs here:
@@ -41,14 +44,13 @@ https://docs.sendgrid.com/ui/account-and-settings/api-keys
 
 Log into your SendGrid account and add the API key per the instructions provided there
 
-![](../.gitbook/assets/sendgrid-personal-page-3.png)
+![](../../.gitbook/assets/sendgrid-api.png)
 
+---
 
 #### Use the API Key
 
 The API Key needs to be inserted as a value in the SendGridMailer.
-
-![](../../.gitbook/assets/sendgrid-personal-api-key-code.png)
 
 There are a few ways to do this.  Setting up spring boot configurations is beyond the scope of this walkthrough, but generally:
 
@@ -60,6 +62,9 @@ There are a few ways to do this.  Setting up spring boot configurations is beyon
 ```
 sendgrid.auth.key="<my api key>"
 ```
+
+---
+
 
 #### Run the service
 
