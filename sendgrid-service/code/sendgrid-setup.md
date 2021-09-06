@@ -1,8 +1,4 @@
----
-description: >-
-In this section we walk through the SendGrid microservice to get a bird's eye
-view of the solution.  Later we'll add more tooling to the example
----
+
 
 
 ### Getting SendGrid
