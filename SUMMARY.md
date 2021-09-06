@@ -10,7 +10,6 @@
 * [developer onboarding](developer-onboarding/onboarding-intro.md)
 * [onboarding part1](developer-onboarding/the-project.md)
   * [setup](sendgrid-service/code/sendgrid-setup.md)
-  * [running](sendgrid-service/code/running.md)
   * [code review](sendgrid-service/code/code-review.md)
   * [unit testing](sendgrid-service/testing/002-unit-test-intro.md)
   * [testing the controller](sendgrid-service/testing/unit-test-controller.md)

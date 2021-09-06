@@ -4,27 +4,22 @@ description: >-
   view of the solution.  Later we'll add more tooling to the example
 ---
 
-# Code Review
-
-## Overview of the solution
+### Overview of the solution
 
 We are going to start out with a simple spring boot microservice containing a rest controller and handler function for user requests, and a SendGridMailer class for transforming the user's request to a SendGrid request and sending to SendGrid.
 
-This microservice starts out with a REST controller that accepts a UserRequest and transforms it to a SendGrid Request, then sends the request to SendGrid
+![](../../.gitbook/assets/sendgrid-personal-mailer%20(1).png)
 
-![](../.gitbook/assets/sendgrid-personal-mailer%20(1).png)
-
-## Walkthrough
+#### Walkthrough
 
 The code for this microservice is a simple textbook REST service.  This is a simple blocking service so that we can explore a simpler paradigm.  Later we'll build a Webflux service when we build the Event Activity service.   Here's the basic outline of the solution:
 
-![](../../../.gitbook/assets/sendgrid-personal-controller-code.png)
+![](../../.gitbook/assets/sendgrid-personal-controller-code.png)
 
-{% hint style="info" %}
-Get the code:  [https://github.com/tiny-engines-code/springboot-microservice-walkthrough.git](https://github.com/tiny-engines-code/springboot-microservice-walkthrough.git)
-{% endhint %}
 
-### SendGrid Controller
+---
+
+#### The Controller
 
 Starting out with the controller -- it's a simple rest service that exposes a post endpoint that our users or programs can call. 
 
@@ -50,7 +45,7 @@ public ResponseEntity<String> handleRequest(@RequestBody String mailRequest)  {
 ```
 {% endcode %}
 
-#### User Request
+**The user request**
 
 This User request is a simplified json record with the basic requirements for sending emails.  Any additional information required to build a SendGrid request are stored as configurations 
 
@@ -72,37 +67,42 @@ Content-Length: 269
 }
 ```
 
-### SendGrid Handler
+---
+
+#### The Handler
 
 The handler function is just a pass-through - it's only function is to convert from a json string to a `SendgridRequest` Object and to provide a final catch for any errant runtime exceptions.
 The design paradigm is that everything returning to the caller is in the form of a valid `Response` object.
 
 ```java 
-    public Response requestHandler(String jsonString) throws IOException {
-        try {
-            //---convert json ----
-            SendgridRequest mailRequest = objectMapper.readValue(jsonString, SendgridRequest.class);
+public Response requestHandler(String jsonString) throws IOException {
 
-            //--- pass to Sendgrigmailr
-            var response  =  sendGridMailer.send(mailRequest);
+    try {
+        //---convert json ----
+        SendgridRequest mailRequest = objectMapper.readValue(jsonString, SendgridRequest.class);
 
-            // ---- handle bad response and return ---
-            if (response == null)
-                throw new NullPointerException("mailer returned unexpected null");
-            return  response;
-        } catch (JsonProcessingException |  IllegalArgumentException ex) {
-            return new Response(HttpStatus.BAD_REQUEST.value(), ex.getMessage(),
-                    Map.of("Content-type", "application/json", "X-Source", "json-format"));
-        }  catch (Exception ex) {
-            return new Response(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage(),
-                    Map.of("Content-type", "application/json", "X-Source", "application-error"));
-        }
+        //--- pass to Sendgrigmailr
+        var response  =  sendGridMailer.send(mailRequest);
+
+        // ---- handle bad response and return ---
+        if (response == null)
+            throw new NullPointerException("mailer returned unexpected null");
+        return  response;
+    } catch (JsonProcessingException |  IllegalArgumentException ex) {
+        return new Response(HttpStatus.BAD_REQUEST.value(), ex.getMessage(),
+                Map.of("Content-type", "application/json", "X-Source", "json-format"));
+    }  catch (Exception ex) {
+        return new Response(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage(),
+                Map.of("Content-type", "application/json", "X-Source", "application-error"));
     }
+}
 
 
 ```
 
-### SendGrid Mailer
+---
+
+#### The Mailer
 
 The SendGridMailer send\(\) method takes the user's request and:
 
@@ -139,11 +139,11 @@ public Response send(SendgridRequest mailRequest) throws IOException {
 ```
 {% endcode %}
 
-#### SendGrid Response 
+**SendGrid Response**
 
 SendGrid will respond with an httpStatus code and any message in the body.  It will aslo include a list of headers
 
-```java
+```javascript
 {
   "statusCode": 202,
   "body": "",
