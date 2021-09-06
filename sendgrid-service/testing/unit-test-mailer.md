@@ -1,8 +1,10 @@
----
-description: Unit testing te SendgridMailer class
----
 
-The SendgridMailer:
+
+
+![](../../.gitbook/assets/sendgrid-personal-mailer.png)
+
+
+<p/><strong>The function under test</strong>
 
 * [ ] Receives a SendgridRequest object from the SendgridHandler
 * [ ] Validates the data
@@ -10,10 +12,7 @@ The SendgridMailer:
 * [ ] Passes the Response object back to the SendgridHandler
 
 
-![](../../.gitbook/assets/sendgrid-personal-mailer.png)
-
-
-<p/><strong>The function accepts a SendgridRequest object</strong>
+<p/><strong>Possible inputs</strong>
 
 * The **data** in the SendgridRequest can be correct or incorrect
 * if the contents are not valid - returns a **Response** object with the appropriate Http status code
@@ -21,22 +20,12 @@ The SendgridMailer:
   * creates a SendGrid API **Request** object from our **SendgridRequest** request, and
   * calls the SendGrid API which returns a **Response** object
 
-
-<p/><strong>It calls the SendGrid API</strong>
-
-* The SendGrid API returns a SendGrid Response object
-* The Response can contain any http status code
-
-
-
-<p/><strong>What kind of response could we possibly get back from SendgridMailer?</strong>
+<p/><strong>Possible outputs</strong>
 
 * The SendGrid API normally returns a SendGrid Response object
 * The Response will contain an http status code
 * We need to handle any http status so that later we can handle failure, retry, and circuit breaker cases
 * We need to handle any Runtime exception
-
-
 
 
 ---

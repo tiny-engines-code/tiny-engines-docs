@@ -1,11 +1,8 @@
----
-description: Unit testing te SendgridHandler class
----
-
-# Unit testing the SendgridHandler
 
 
-The SendgridHandler:
+![](../../.gitbook/assets/sendgrid-personal-handler.png)
+
+<p/><strong>The function under test</strong>
 
 * [ ] Receives a JSON string from the SendgridController
 * [ ] Calls the .send() function of the SendgridMailer class
@@ -13,35 +10,24 @@ The SendgridHandler:
 * [ ] Passes the Response object back to the SendgridController
 
 
-![](../../.gitbook/assets/sendgrid-personal-handler.png)
-
-
-<p/><strong>he function accepts a JSON request bodyn</strong>
+<p/><strong>Possible inputs</strong>
 
 * The **json** can be correct or incorrect
 * A "good" json string is converted to a SendgridRequest object
 
-
-<p/><strong>It calls the SendgridMailer program</strong>
-
-* It passes the SendgridRequest to the SendgridMailer.send() function
-
-
-
-<p/><strong>What kind of response could we possibly get back from SendgridMailer?</strong>
+<p/><strong>Possible outputs</strong>
 
 * a Sendgrid Response object
 * a Runtime exception
 * a null Response object
 
-
 ---
-#### Testing the json conversion
 
-We don't have many scenarios to cover.  The conversion will either fail or succeed for any number of reasons.   If it fails we want to return a BAD\_REQUEST.
+We don't have many scenarios to cover.  The conversion will either fail or succeed for any number of reasons.   If it fails we want to return a BAD REQUEST.
 * Json conversion - converts the json string to a SendgridRequest bean
    1. handle good conversions
    2. handle exceptions
+
 
 ```java
 @Test

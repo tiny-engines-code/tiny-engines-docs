@@ -1,10 +1,10 @@
-# integration testing
 
-The goal of integration testing is to test more of the overall functionality of the solution.  Unlike unit testing, our goal is to verify that the "units" of the solutino work together to meet a business requirement
+The goal of integration testing is to test more of the overall functionality of the solution.  Unlike unit testing, our goal is to verify that the "units" of the solution work **together** to meet a business requirement
 
+---
 
+#### Approach
 
-The environment
 For integration testing we are using
 * Wiremock to mock the SendGrid API
 * This allows all of our code to be testing as a single unit

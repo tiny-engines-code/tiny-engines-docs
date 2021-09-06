@@ -1,10 +1,6 @@
----
-description: Unit testing the SendgridController
----
 
-The SendgridController is a REST API that receives a simple json request fr an email to be sent, and responds back with the status of our attempt to format and send that email to Sendgrid.
 
-The SendgridController:
+The SendgridController is a REST API that receives a simple json request for an email to be sent, and responds back with the status of our attempt to format and send that email to Sendgrid. It:
 
 * [ ] Receives a POST /send request with a JSON body
 * [ ] Calls the requestHandler() function of the SendgridHandler class
@@ -14,7 +10,7 @@ The SendgridController:
 ![](../../.gitbook/assets/sendgrid-personal-controller.png)
 
 
-<p/><strong>The function "function" under test is a POST /send request</strong>
+<p/><strong>The function under test</strong>
 
 * A call to the function has the following components:
   * The path  \("/email/v2/send"\)
@@ -22,23 +18,23 @@ The SendgridController:
   * A json string having a simplified email request
 
 
-<p/><strong>The function accepts a JSON request body</strong>
+<p/><strong>Possible Inputs</strong>
 
 * The **path** can be correct or incorrect
 * The method can be **POST** or an unsupported method such as GET, PUT, etc.
 * The **JSON** string can be valid or invalid
 
 
-
-<p/><strong>What kind of response could we possibly get back</strong>
+<p/><strong>Possible outputs</strong>
 
 * a Sendgrid Response object
 * a Runtime exception
 * a null Response object
 
 
+---
 
-### Testing the controller inputs
+#### Testing the controller inputs
 
 First, we want to test how the controller responds to good and bad inputs.  In this is case we can establish a pattern in one unt test and then simply vary the data to extend it to other cases.  That's the case with the client input. 
 
@@ -73,7 +69,9 @@ void handles_bad_json_format() throws Exception {
 ```
 {% endcode %}
 
-### Testing SendgridHandler::requestHandler responses 
+---
+
+#### Testing SendgridHandler::requestHandler responses 
 
 The goal of the controller is to get the user input and hand off the processing to a requestHandler function.  With that design, the only thing we need to test  is how it handles the return from the requestHandler.  We'll use the same pattern as above, but we need to mock the requestHandler so that we can get the return values we want to test.
 
