@@ -1,14 +1,14 @@
-###Creating a Cucumber scenario
 
-For this example, we'll first add the Cucumber modules to our build.  I'm adding the spring module as well because we are working wih Spring Boot.  At the current date there are a few additional configurations and files we need to add to make Cucumber work with Junit5 - we'll list those in this section
+
+For this example, we'll first add the Cucumber modules to our build.  I'm adding the spring module as well because we are working wih Spring Boot.  At the current date there are a few additional configurations and files we need to add to make Cucumber work with Junit5 and we'll show those in this section
 
 ---
-#####Setup
+#####Cucumber JVM Setup
 
-Add the Cucumber modules to the build 
+Add the Cucumber modules to the build - in this case we are using Gradle
 
 {% code title="build.gradle.java" %}
-```javascript
+```
 configurations {
     cucumberRuntime {
         extendsFrom testImplementation
@@ -32,7 +32,7 @@ testImplementation group: 'io.cucumber', name: 'cucumber-core', version: "${cuke
 Add a junit-platform.properties file for cucumber junit properties 
 
 ---
-##### Code
+##### Springboot implementation
 
 To support Junit5 and Cucumber as of the date of this walk-through we separate out the typical annotations into separate classes
 
@@ -43,6 +43,8 @@ To support Junit5 and Cucumber as of the date of this walk-through we separate o
 
 ![](../../.gitbook/assets/run-cucumber.png)
 
+#####Runner class
+
 * [x] create a runner class (RunCucumber) annotated with the @Cucumber annotation
 
 ```java 
@@ -51,7 +53,9 @@ public class RunCucumberTest {
 }
 ```
 
-* [x] create a spring configuration class (CucumberSpringConfiguration)
+####Configuration class
+
+* [x] create a spring configuration class (CucumberSpringConfiguration) - this is where all of the test context an pragmas go
 
 ```java 
 @SpringBootTest(
@@ -64,6 +68,8 @@ public class CucumberSpringConfiguration {
 
 }
 ```
+
+####Feature files
 
 * [x] create the feature file (mailer.feature)
 
@@ -89,6 +95,9 @@ Feature: Sendgrid acceptance test example
 ```
 
 {% endcode %}
+
+---
+#### Example - acceptance test
 
 * [x] create the supporting test cases
 

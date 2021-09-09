@@ -14,6 +14,7 @@
 
 * The **json** can be correct or incorrect
 * A "good" json string is converted to a SendgridRequest object
+* A failed conversion is snet back to the client as a BAD REQUEST
 
 <p/><strong>Possible outputs</strong>
 
@@ -22,51 +23,42 @@
 * a null Response object
 
 ---
+#### Example - Testing the Controller request
 
-We don't have many scenarios to cover.  The conversion will either fail or succeed for any number of reasons.   If it fails we want to return a BAD REQUEST.
-* Json conversion - converts the json string to a SendgridRequest bean
-   1. handle good conversions
-   2. handle exceptions
+We don't have many scenarios to cover in the handler.  The json conversion will either fail or succeed for any number of reasons.  If the conversion succeeds we pass the result to the SendgridMailer function. If it fails we want to return a BAD REQUEST.
 
-
+In the example below, the handler receives a bad json string which will throw a Json exception.  The handler function should catch the exception and return a BAD_REQUEST Response object to the controller
 ```java
 @Test
-void test_handle_null_input_returns_400() throws Exception {
-    var response = new SendgridHandler(new SendGridMailer())
-                            .requestHandler(null);
-                            
-    assertThat(
-        response.getStatusCode())
-          .isEqualTo(HttpStatus.BAD_REQUEST.value());
+void test_handle_bad_json_input_returns_400() throws Exception {
+
+    // when the handler's  requestHandler() method is called with bad json
+    var response = new SendgridHandler(new SendgridMailer()).requestHandler("{ \"name\":\"jo}");
+    
+    // then it should return a BAD REQUEST Response object
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
 }
 ```
 
 
 ---
-#### Testing the SendgridMailer response
+#### Example - Testing the SendgridMailer response
 
-The repeatable pattern for all SendgridMailer returns is to mock the return we are trying to test, then test for the expected results.
-* Handle the SendgridMailer.send() responses
-   1. handle all status codes
-   2. handle any exceptions
-
+In the example below, the handler calls the mailer function which throws an exception.  The handler function should catch the exception and return a Response object to the controller
 
 {% code title="example - handle a mailer exception" %}
 ```java
-@Test 
-void handles_requestHandler_null() throws Exception {
-    // mock the mailer
-    var sendGridMailer = mock(SendGridMailer.class);
-    when(sendGridMailer.send(any(SendgridRequest.class)))
-            .thenThrow(new RuntimeException("Badd JuJu"));
-    
-    // execute
-    var response = new SendgridHandler(sendGridMailer)
-                            .requestHandler(createRequest());
-    // test output
+@Test
+void handles_requestHandler_exception() throws Exception {
+    // when the handler calls the mailer and it throws an exception
+    var sendGridMailer = mock(SendgridMailer.class);
+    when(sendGridMailer.send(any(SendgridRequest.class))).thenThrow(new RuntimeException("Badd JuJu"));
+    var response = new SendgridHandler(sendGridMailer).requestHandler(createRequest());
+
+    // then the handler witch return a valid Respose object
     assertAll(
-         () -> assertEquals(response.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR.value()),
-         () -> assertEquals("Badd JuJu", response.getBody())
+            () -> assertEquals(response.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR.value()),
+            () -> assertEquals("Badd JuJu", response.getBody())
     );
 }
 ```

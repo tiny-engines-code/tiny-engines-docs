@@ -1,22 +1,31 @@
-# acceptance testing
 
-### What's the value
-The idea with what I'm calling acceptance testing is that we are providing some validation to business stakeholders that a given solution is meeting the business goals of the company.  Some feel that a more conversational language for generating and evaluation test cases will help us meet that goal.  BDD (Behavioral Driven Development) is an oft used approach to achieving that, and there are several frameworks that support BDD.  Cucumber is one such framework.  The "language" part of BDD frameworks is often Gherkin.
+
+The idea with what I'm calling acceptance testing is that we are providing validation to business stakeholders that a given solution meets the business goals of the company.  Some feel that a more conversational language for generating and evaluation test cases will help us meet that goal.  
+
+#### BDD
+BDD (Behavioral Driven Development) is an oft used approach to achieving that.  It's a more conversational way of writing tests that some feel is more readable.  The 'language' that is often used for this is called "Gherkin". There are several frameworks that support BDD.  Cucumber is one such framework.  
+
+Like many of these tools, Cucumber is not so much a new testing framework as a way of expressing the tests in a different way.  In this section we'll use Cucumber to express test that we actually write in Junit5 and Wiremock.
 
 Is BDD (Behavioral Driven Development) a new way of testing, or yet another testing framework?  I think it can be both depending on how it's used.
 
-If there's organizational support to develop documentation before build and foster a tight cooperation between business users and software engineers  then the promise of BDD could be realized.  That being said, it seems to me that many companies who create software are moving in the opposite direction and for those, a simple framework would not bridge the gap.
+#### When it's useful
+The promise of BDD really requires that business users are closely and effectively involved in the creation and validation of tests.  If BBD is not a set of behaviors supported in the organization then it's just another testing framework, and honestly, all Java test frameworks (testNG, Juint, Mockito, Spock) accomplish the same things just fine -- without having to support yet another syntax.  
 
-If BBD is not a set of behaviors supported in the organization - then it's just another testing framework.  Honestly, all Java test frameworks allow us to accomplish adequate tests and any of the available frameworks (testNG, Juint, Mockito, Spock) will work just fine.  What really separates great testing is designing a well-designed and complete set of tests.
+But, if a team simply loves the way BDD tests are developed and can be efficient in testing, then they should use BDD.
 
-So, if a team simply loves the way BDD tests are developed and can be efficient in creating an overall test approach, then they should use BDD.  It is fun to see these tests working.  Or if the team feels that the promise of a shared language that brings requirements closer to code is inpiring enough to devote their energies to -- then that's how great things sometimes happen.
+---
 
-We'll use the Cucumber framework for this example of BDD.   The basic idea is that there's a very opinionated way to declare a test. 
-* [x] **GIVEN** - is for defining the logical precondition or state 
-* [x] **WHEN** is for defining an action
-* [x] **THEN** is for defining the expected or desired state after the action takes place
+####Gherkin
+
+The most widely-used language of BDD is Gherkin. Cucumber is a popular implementation of the Gherkin language and BDD.  The basic idea is that there's a very opinionated way to declare a test.
+
+* [x] **Feature** - is a suite of tests
+* [x] **Scenario** - is the title of a given test
+* [x] **GIVEN** - is used for defining the starting state before the test starts
+* [x] **WHEN** is used for defining an action
+* [x] **THEN** is used for defining the expected or desired state after the action takes place
 * [x] **AND** is for adding conditions or states to any of the above
-
 
 
 As an example,
@@ -30,11 +39,18 @@ Scenario: Happy path email delivery
     And I expect that the email will be delivered to the recipient
 ```
 
-Cucumber scenarios are stored in files with the .feature extension.  Cucumber wires these statements to the code that implements the actual transitions using Java, Junit, any and all the tools we've used so far.
+---
+#### Cucumber
+
+Cucumber "wires" these statements to the actual code that implements the test -- the actual test is often still in Junit, Spock or any and all the tools we've used so far.
 
 ![](../../.gitbook/assets/feature-method.png)
 
-```
+
+#### Cucumber feature files
+Cucumber scenarios are stored in files with the .feature extension.
+
+```gherkin
 Feature: Sendgrid acceptance test example
   A few example bdd tests using cucumber as the driver
 

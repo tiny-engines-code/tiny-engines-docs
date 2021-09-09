@@ -1,17 +1,14 @@
 ## Unit testing 
 
-Effective unit testing starts with modular code design.  Of course that's much easier in a textbook example like this, but the really key functions should be able to define a simple set of inputs and the expected outputs for those inputs.  
+Effective unit testing starts with modular code design.  Of course that's much easier in a textbook example like this, but for any given function -- we'll call it our function "under test" -- we should be able to define a simple set of possible inputs and possible outputs for those inputs.  
 
-For each "function" under test (This is usually a single method)
 
 ![](../../.gitbook/assets/sendgrid-personal-page-6-1-.png)
 
-<p/><strong>What are the inputs to the function?</strong>
-
-* List the input parameters that the unit can be called with
-* List external inputs that the function depends on
+<p/><strong>What is our function under test?</strong>
 
 
-<p/><strong>What are the expected results?</strong>
+<p/><strong>What are the possible inputs to the function?</strong>
 
-* For each set of inputs, what is the expected response?
+
+<p/><strong>What are the possible outputs?</strong>

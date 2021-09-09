@@ -14,7 +14,7 @@ This is a version of the Confluent sample program, except that the configuration
 * IConfluentect the data in Confluent using the Control Center or the Kafka-utils tool
 * Change the record count and run again
 
-![](../.gitbook/assets/01-hello-kafka.png)
+![](../.gitbook/assets/kafka/01-hello-kafka.png)
 
 ---
 ###02-hello-kafka-again
@@ -28,7 +28,7 @@ We'll dig into the basics of producing and consuming simple text messages to Kaf
 * Change the record count and run again
    
 
-![](../.gitbook/assets/02-hello-kafka-again.png)
+![](../.gitbook/assets/kafka/02-hello-kafka-again.png)
 
 ---
 
@@ -38,7 +38,7 @@ We've also separated configuration from logical code.
 * Walk through the admin code
 * Run the program and create a new topic in the training environment
 
-![](../.gitbook/assets/03-hello-admin.png)
+![](../.gitbook/assets/kafka/03-hello-admin.png)
 
 ---
 
@@ -51,7 +51,7 @@ Introduce the concept of serializers and how they are implemented in Kafka.
 * IConfluentect the data in Confluent using the Control Center or the Kafka-utils tool
 * Run the program 
 
-![](../.gitbook/assets/04-hello-json.png)
+![](../.gitbook/assets/kafka/04-hello-json.png)
 
 ---
 ###05-hello-json (perfs)
@@ -59,7 +59,7 @@ Quickly walk through the executor thread setup - the important takeaway here is 
 
 * IConfluentect the threaded producer
 
-![](../.gitbook/assets/05-hello-perf.png)
+![](../.gitbook/assets/kafka/05-hello-perf.png)
 
 ---
 ###06-hello-avro
@@ -88,14 +88,14 @@ Confluent Schema-Registry API
 
 Optionally walk through KafkaAvro serializer logic
 ###
-![](../.gitbook/assets/06-hello-avro.png)
+![](../.gitbook/assets/kafka/06-hello-avro.png)
 
 ---
 ###07-hello-loadgen
 
  The same basic material as version 06, but replace the User pojo with a NotificationStatus pojo, and substitute executor threads with a reactive approach (just for fun).
  
-![](../.gitbook/assets/07-hello-loadgen.png)
+![](../.gitbook/assets/kafka/07-hello-loadgen.png)
 
 ---
 ###08-kafka-spring (json)
@@ -103,7 +103,7 @@ Optionally walk through KafkaAvro serializer logic
  
 SpringCloud offers an even simpler generic interface
    
-![](../.gitbook/assets/08-kafka-spring-json.png)
+![](../.gitbook/assets/kafka/08-kafka-spring-json.png)
 
 ---
 
@@ -113,6 +113,6 @@ Revisit the 06-hello-avro solution and re-write using spring-kafka
 * Walk through all of the Spring producer code
 * Run the program
 
-![](../.gitbook/assets/09-spring-avro.png)
+![](../.gitbook/assets/kafka/09-spring-avro.png)
 
 

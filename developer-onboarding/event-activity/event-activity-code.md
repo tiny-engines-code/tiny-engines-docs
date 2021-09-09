@@ -1,42 +1,8 @@
-## Work in progress
 
+For this endpoint we replace the standard blocking controller with a 'reactive' router.The router  hands off the processing to a handler
 
-Sendgrid will return a batch of events - having different schemas -- on the event activity feed. We'll get this payload in the response body of our POST /events endpoint.
-
-
-
-```json5
-[
-  {
-    "email": "xxx@gmail.com",
-    "event": "processed",
-    "id": "30000",
-    "send_at": 0,
-    "sg_event_id": "cHJvY2Vzc2VkLTEyMDAxNDgyLUt1ZHFEVW8tUVg2bGxRSHJteHpNRVEtMA",
-    "sg_message_id": "KudqDUo-QX6llQHrmxzMEQ.filterdrecv-66dddc765f-mbf8r-1-60F38A19-27.0",
-    "smtp-id": "<KudqDUo-QX6llQHrmxzMEQ@geopod-ismtpd-3-0>",
-    "timestamp": 1626573337
-  },
-  {
-    "email": "xxxx@gmail.com",
-    "event": "delivered",
-    "id": "30000",
-    "ip": "168.245.64.230",
-    "response": "250 2.0.0 OK  1626573338 r9si15457369edq.454 - gsmtp",
-    "sg_event_id": "ZGVsaXZlcmVkLTAtMTIwMDE0ODItS3VkcURVby1RWDZsbFFIcm14ek1FUS0w",
-    "sg_message_id": "KudqDUo-QX6llQHrmxzMEQ.filterdrecv-66dddc765f-mbf8r-1-60F38A19-27.0",
-    "smtp-id": "<KudqDUo-QX6llQHrmxzMEQ@geopod-ismtpd-3-0>",
-    "timestamp": 1626573338,
-    "tls": 1
-  } 
-]
-```
-
-
-For this endpoint we replace the standard blocking controller with a 'reactive' router.  The router  hands off the processing to a handler
-
-
-This kind of endpoint is usually `store and forward` -- we want to capture and handle any errors - because there's no one on the other side to react to our error.
+---
+####Controller
 
 ```java
 @Configuration
@@ -51,17 +17,24 @@ public class EventRouter {
 
 ```
 
-In this kind of application we want to get the raw data to the message broker as fast and risk-free as possible.  We can always clean it up later in SQL or with Apache Spark, Flink or some other tool.  In this case however we want to make sure that the batch size never gets bigger than a certain configured amount (and we want something to test for this example).  So we are splitting large batches into smaller chunks and sending those chunks to Kafka.
+---
+#### Handler
 
+This kind of endpoint is usually `store and forward` -- we want to capture and handle any errors - because there's no one on the other side to react to our error.
+
+So we want to get the raw data to the message broker as fast and risk-free as possible.  We can always clean it up later in SQL or with Apache Spark, Flink or some other tool.  
+
+But at high volumes we also want to make sure that the batch size never gets bigger than a certain configured amount (and we want something to test for this example).  So we are splitting large batches into smaller chunks and sending those chunks to Kafka.
 
 ```java 
     public void eventService(String json) {
         try {
+        
             // a list of different schemas can come in, so handle as a list of maps
             TypeReference<List<Map<String, Object>>> typeRef = new TypeReference<>() {};
             List<Map<String, Object>> list = objectMapper.readValue(json, typeRef);
 
-            // nice to leave the records in batches for performance, but make sure the batches are not huge
+            // It's nice to leave the records in batches for performance, but make sure the batches are not huge
             if (list.size() <= chunkSize) {
                 // send it!
                 writer.write(list);
@@ -80,6 +53,9 @@ In this kind of application we want to get the raw data to the message broker as
     }
 
 ```
+
+---
+#### Kafka Producer
 
 Finally we are calling the Kafka producer that:
 * implements a local queue - batching our requests 

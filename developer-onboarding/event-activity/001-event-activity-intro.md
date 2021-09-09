@@ -1,12 +1,9 @@
-## Work in progress
 
-{% hint style="info" %}
-Code for this section is at: [Github](https://github.com/tiny-engines-code/webhook-service-walkthrough)
-{% endhint %}
+When we submit a request to SendGrid we get an immediate response that the request was received.  We can also get asynchronous `event activity` messages from Sendgrid about the delivery progress and how the recipient interacted with the email.
 
-###Basic Flow
+In order to get these we need to set up a REST 'endpoint' that listens for the messages, and we need to tell Sendgrid to send the messages to our endpoint.
 
-When we submit a request to SendGrid we get an immediate response that the request was received.  We can configure sendgrid with our webhook service so that we can get later information about how the recipient interacted with the email.
+#### The basic flow
 * [x] SendGrid completes processing of the request
 * [x] The email makes it to the recipient (or not)
 * [x] The recipient opens the email (or not)
@@ -14,11 +11,9 @@ When we submit a request to SendGrid we get an immediate response that the reque
 
 ![](../../.gitbook/assets/event-activity.png)
 
-###The service
+####The event activity service
 
-If we want to know what happened after we requested the email, we need to set up a REST gateway so that SendGrid can deliver those events asynchronously.
-
-The `Event Activity` service can listen for these events and store the raw data in Kafka for further processing.  Unlike the Sendgrid mailer service, we replace the controller with a reactive router so that we can explore testing that sort of service.  In the next few sections we'll
+The `Event Activity` service will listen for these messages and store the raw data in Kafka for further processing.  Unlike the Sendgrid mailer service, we replace the controller with a reactive router so that we can explore testing that sort of service.  In the next few sections we'll
 
 * [x] Do a brief walk-through of the code
 * [x] Explore testng the reactive router 

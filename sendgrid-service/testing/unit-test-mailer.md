@@ -30,16 +30,16 @@
 
 ---
 
-For testing we need to cover three basic boundaries
+For testing we need to cover three boundaries
 
 1. Verification of the input SendgridRequest object
 2. Creation of a correct SendGrid API request based on the SendgridRequest
 3. Calling the API and handling any response
 
 ---
-#### Verification of the input SendgridRequest object
+#### Example - Verification of the input SendgridRequest object
 
-Since we want to test many scenarios, we'll use a parameterized test and pass several different scenarios into the same test.  
+Since we want to test many scenarios, we'll use a parameterized test and pass several scenarios into the same test.  
 
 ```java
 private static Stream<Arguments> payloadProvider() {
@@ -65,10 +65,11 @@ We don't want to call the real API so we'll mock the api() method that calls it.
 ArgumentCaptor<Request> apiRequestCaptor;/**
 ```
 
-#####The method below takes any number of payload inputs and:
-* [ ] returns any Validation errors before calling the SendGrid API
-* [ ] If the request is valid re-formats the SendgridRequest into a SendGrid Request object
-* [ ] calls the SendGrid API and handles any response
+We then call our test example, which:
+* [x] returns any Validation errors before calling the SendGrid API
+* [x] If the request is valid re-formats the SendgridRequest into a SendGrid Request object
+* [x] calls the SendGrid API and 
+* [x] handles any response
 
 
 {% code title="// example - test the sendgridMailer" %}
@@ -81,17 +82,18 @@ ArgumentCaptor<Request> apiRequestCaptor;/**
 @ParameterizedTest(name = "{index} => ''{0}'' - ''{1}''")
 @MethodSource("payloadProvider")
 void validates_requests_and_return_with_code_or_call_api(String message, HttpStatus expectedStatus, String sender, String from, String to, String subject, String body, Map<String, String> custom) throws IOException {
-    // mock the API
+    
+    // Mock the API
     lenient().when(sendGridClient.api(any(Request.class))).thenReturn(new Response(HttpStatus.OK.value(), "{}", null));
 
-    // create an input sendgridRequest based on the parameterized values passed in and set properties
+    // create an input SendgridRequest based on the parameterized values passed in and set properties
     var mailer = new SendgridMailer(sendGridClient);
     mailer.apiKeyValue = this.apiKeyValue;
     mailer.host = this.host;
     mailer.apiVersion = this.apiVersion;
     mailer.sdkVersion = this.sdkVersion;
 
-    // call SendgridMailer::send
+    // call SendgridMailer::send()
     var response = mailer.send(
             SendgridRequest.builder()
                     .senderName(sender)
@@ -106,7 +108,6 @@ void validates_requests_and_return_with_code_or_call_api(String message, HttpSta
     assertThat(response.getStatusCode()).isEqualTo(expectedStatus.value());
 
     // if the status code is OK, then we should have caled the API
-    //   - otherwise we should have returned early and NOT called the API
     if (expectedStatus == HttpStatus.OK) {
         verify(sendGridClient).api(apiRequestCaptor.capture());
         Request request = apiRequestCaptor.getValue();
@@ -115,6 +116,8 @@ void validates_requests_and_return_with_code_or_call_api(String message, HttpSta
         assertThat(request.getEndpoint()).isEqualTo(String.format("/%s/mail/send", this.apiVersion));
         assertThat(request.getHeaders().getOrDefault("Authorization", "")).isEqualTo("Bearer " + apiKeyValue);
     } else {
+    
+       // If the request fails validation we should have returned early and NOT called the API
         verifyNoInteractions(sendGridClient);
 
     }

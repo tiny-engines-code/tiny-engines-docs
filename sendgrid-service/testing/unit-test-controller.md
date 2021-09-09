@@ -1,24 +1,21 @@
 
 
-The SendgridController is a REST API that receives a simple json request for an email to be sent, and responds back with the status of our attempt to format and send that email to Sendgrid. It:
-
-* [ ] Receives a POST /send request with a JSON body
-* [ ] Calls the requestHandler() function of the SendgridHandler class
-* [ ] Returns a status code as its response to the caller
-
-
 ![](../../.gitbook/assets/sendgrid-personal-controller.png)
 
 
 <p/><strong>The function under test</strong>
 
-* A call to the function has the following components:
-  * The path  \("/email/v2/send"\)
-  * The method \(POST\)
-  * A json string having a simplified email request
+The controller receives POST requests from clients and hands them off to the 'hendler' function.
+It receives a Response object from the handler and passes it back to the client as JSON.
 
 
 <p/><strong>Possible Inputs</strong>
+
+A call to the function has the following components:
+* The path  \( e.g. `"/email/v2/send"\`)
+* The method \(e.g. `POST`\)
+* A `json` request body having a simplified email request
+
 
 * The **path** can be correct or incorrect
 * The method can be **POST** or an unsupported method such as GET, PUT, etc.
@@ -38,20 +35,22 @@ The SendgridController is a REST API that receives a simple json request for an 
 
 First, we want to test how the controller responds to good and bad inputs.  In this is case we can establish a pattern in one unt test and then simply vary the data to extend it to other cases.  That's the case with the client input. 
 
-For each test we can 
-1. create a MockMvc call to the controller - this mimics a real call to the /send endpoint
-2. set the **content** that we want to test for
-3. expect the correct response for that content
+We can often come up with a single pattern for several units test and vary the inputs to create our various scenarios.
+In this case we'll:
+- create a MockMvc call to the controller - this mimics a real call to the /send endpoint
+- set the **content** that we want to test for
+- expect the correct response for that content
 
 We'll use this pattern to test:
-1. **Bad json** format (Something that will fail json conversion)
-2. **Bad path** (the client is calling a path that we do not support)
-3. **Bad method** (something other than POST)
+- **Bad json** format (Something that will fail json conversion)
+- **Bad path** (the client is calling a path that we do not support)
+- **Bad method** (something other than POST)
 
 {% code title="// example - bad json format" %}
 ```java
 @Test
 void handles_bad_json_format() throws Exception {
+
    // WHEN the client calls with  a bad json format
    var expectedStatus = HttpStatus.INTERNAL_SERVER_ERROR;
    
@@ -71,18 +70,9 @@ void handles_bad_json_format() throws Exception {
 
 ---
 
-#### Testing SendgridHandler::requestHandler responses 
+#### Testing the Handler outputs
 
-The goal of the controller is to get the user input and hand off the processing to a requestHandler function.  With that design, the only thing we need to test  is how it handles the return from the requestHandler.  We'll use the same pattern as above, but we need to mock the requestHandler so that we can get the return values we want to test.
-
-1. set up the MockMvc call
-2. Mock the requestHandler\(\) to return the value we want to test
-3. expect the correct http status response for that content
-
-For each test we can
-1. Use the same MockMvc patter for inputs
-2. set the **Response** conditions that the SendgridHandler could return
-3. expect the correct response for that content
+The controller receives outputs from the SendGrid handler To test that, we'll use the same pattern as above, but we need to mock the requestHandler so that we can get the return values we want to test.
 
 We'll use this pattern to test:
 1. **Any return code** Handle any return code we get from the SendgridHandler
