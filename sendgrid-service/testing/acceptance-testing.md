@@ -34,7 +34,7 @@ Add a junit-platform.properties file for cucumber junit properties
 ---
 ##### Springboot implementation
 
-To support Junit5 and Cucumber as of the date of this walk-through we separate out the typical annotations into separate classes
+To support Junit5 and Cucumber as of the date of this walk-through we need to separate out the typical annotations into separate classes
 
 * [x] create a runner class (RunCucumber) annotated with the @Cucumber annotation
 * [x] create a spring configuration class (CucumberSpringConfiguration)
@@ -55,7 +55,7 @@ public class RunCucumberTest {
 
 ####Configuration class
 
-* [x] create a spring configuration class (CucumberSpringConfiguration) - this is where all of the test context an pragmas go
+* [x] create a spring configuration "wrapper" class (CucumberSpringConfiguration) - this is where the test context and pragmas go
 
 ```java 
 @SpringBootTest(
@@ -73,7 +73,7 @@ public class CucumberSpringConfiguration {
 
 * [x] create the feature file (mailer.feature)
 
-For this example scenario we want to ensure that invalid values are caught before they are sent to the SendGrid API.  We start off with one valid payload which will mak it throough our validation but will be 'caught' before actually being sent.  The rest of the cases have on missing or incorrect field per test. 
+In this example we want to ensure that any invalid values are caught before they are sent to the SendGrid API.  We start off with one valid payload which will make it through our validation but will be 'caught' by our final mock before actually being sent.  The rest of the cases have on missing or incorrect field per test and should be 'caught' **before** trying to call SendGrid and getting to our final mock. 
 
 {% code title="mailer.feature" %}
 ```gherkin

@@ -2,22 +2,15 @@
 
 ---
 
-####Approach
+####Integration testing continued...
 We want to be able to test the whole flow from the client's initial request, to the call to the SendGrid API.  But we don't want to actually send mail, and we want to control what we get back from the API, so we can create all the scenarios we want to test.
 
-We'll accomplish that by using Wiremock to mock the SendGrid API
-
-* This allows all of our code to be testing as a single unit
-* Because this is a simple service - that's arguably adequate for the service if we use parameterized scenarios to mimic the various
-* The rationale there is that:
-    * We have already tested how the solution handles input data al the way up to the Sendgrid Client object that calls the Sendgrid API
-    * We don't need to integration-test the SendGrid Client itself for those input scenarios
-    * It's more important that we focus on the way we respond to output from the SendGrid API
+We'll accomplish that by using Wiremock to mock the SendGrid API.  As seen above, Wiremock lets us get all the way out to the actual call to SendGrid API - with Wiremock we are no longer mocking the SendGrid "client", we are mocking the SendGrid "server" itself.
 
 ---
 #### Wiremock and Junit5 setup
 Let's get started...
-Currently, the Junit5 and Wiremock integration is tricky so we'll step through it
+Currently, the Junit5 and Wiremock integration is tricky, so we'll step through it
 
 Create the gradle dependency for wiremock
 ```java
@@ -54,7 +47,7 @@ public class WireMockInitializer
 ```
 ---
 #### Example - integration test
-Create your tests.   We could use a rest client to create POST requests to our controller, but you'll often see developer  calling the controller's methods directly, and that's what we'll do here.
+Create your tests.   We could use a rest client to create POST requests to our controller, but you'll often see developers  calling the controller's methods directly, and that's what we'll do here.
 
 We'll use an argument generator to create all the status codes that we could get from the SendGrid API.   Given our present logic that seems like overkill, but in a real service we'd want to react differently based on the return code.  For 500 errors we might want to retry.  For most 400 errors we will not want to retry, but for 429 return codes we have a chance to throttle our request down and retry.  So being able to create those diffreent returns from the mocked SendGrid API will be needed.
 

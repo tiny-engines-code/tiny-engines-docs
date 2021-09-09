@@ -1,14 +1,9 @@
-
+Our first service is a basic blocking spring boot java rest service that receives a simple request to email some recipient.
 
 
 ![](../../.gitbook/assets/sendgrid-mailer.png)
 
-
-
----
-### High level design
-Our first service is a basic blocking spring boot java rest service that receives a simple request to send an email to some recipient.  The service should:
-
+The service should:
 * [x] Accept a simple json payload
 * [x] Validate the json format and the input data
 * [x] Generate a SendGrid API http request object and sends the request to the SendGrid API
@@ -20,7 +15,7 @@ Our first service is a basic blocking spring boot java rest service that receive
 
 ---
 
-### Components
+#### Component Detail
 
 
 **SendgridController (Controller)**

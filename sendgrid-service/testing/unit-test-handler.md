@@ -55,7 +55,7 @@ void handles_requestHandler_exception() throws Exception {
     when(sendGridMailer.send(any(SendgridRequest.class))).thenThrow(new RuntimeException("Badd JuJu"));
     var response = new SendgridHandler(sendGridMailer).requestHandler(createRequest());
 
-    // then the handler witch return a valid Respose object
+    // then the handler will return a valid Respose object
     assertAll(
             () -> assertEquals(response.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR.value()),
             () -> assertEquals("Badd JuJu", response.getBody())

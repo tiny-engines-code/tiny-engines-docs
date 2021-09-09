@@ -1,6 +1,6 @@
 
 
-### Getting SendGrid
+#### Getting SendGrid
 
 SendGrid is a good choice for our example because it has a free tier, and a well-documented API that we can creat a client for as well as a webhook that we can provide a service for.
 

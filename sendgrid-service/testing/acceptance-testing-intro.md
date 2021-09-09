@@ -1,18 +1,18 @@
 
 
-The idea with what I'm calling acceptance testing is that we are providing validation to business stakeholders that a given solution meets the business goals of the company.  Some feel that a more conversational language for generating and evaluation test cases will help us meet that goal.  
+The idea with what I'm calling acceptance testing is that we are providing validation not to ourselves, but to business stakeholders.  Many feel that a more conversational language for creating test cases can help us communicate the business scenarios.  
 
 #### BDD
-BDD (Behavioral Driven Development) is an oft used approach to achieving that.  It's a more conversational way of writing tests that some feel is more readable.  The 'language' that is often used for this is called "Gherkin". There are several frameworks that support BDD.  Cucumber is one such framework.  
-
-Like many of these tools, Cucumber is not so much a new testing framework as a way of expressing the tests in a different way.  In this section we'll use Cucumber to express test that we actually write in Junit5 and Wiremock.
-
-Is BDD (Behavioral Driven Development) a new way of testing, or yet another testing framework?  I think it can be both depending on how it's used.
+BDD (Behavioral Driven Development) is an oft used approach to achieving that business communication.  It's a more conversational way of writing tests that some feel is more readable.  The 'language' that is often used for this is called "Gherkin". There are several frameworks that support BDD.  `Cucumber` is one such framework.  
 
 #### When it's useful
-The promise of BDD really requires that business users are closely and effectively involved in the creation and validation of tests.  If BBD is not a set of behaviors supported in the organization then it's just another testing framework, and honestly, all Java test frameworks (testNG, Juint, Mockito, Spock) accomplish the same things just fine -- without having to support yet another syntax.  
+The promise of BDD really requires that business users are closely and effectively involved in the creation and validation of tests.  If BBD is not a set of behaviors supported in the organization then it's just another testing framework, and honestly, all Java test frameworks (testNG, Juint, Mockito, Spock) accomplish the same things just fine without having to support yet another syntax.
 
 But, if a team simply loves the way BDD tests are developed and can be efficient in testing, then they should use BDD.
+
+####Cucumber
+Like many BDD tools, Cucumber is not so much a new testing framework as a way of expressing the tests in a different way.  We'll still use most of our existing test frameworks 'under the covers'.  In this section we'll use Cucumber to express test that we actually write in Junit5 and Wiremock.
+
 
 ---
 

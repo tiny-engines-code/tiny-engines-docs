@@ -1,27 +1,39 @@
----
-description: >-
-  In this section we walk through the SendGrid microservice to get a bird's eye
-  view of the solution.  Later we'll add more tooling to the example
----
 
-### Overview of the solution
-
-We are going to start out with a simple spring boot microservice containing a rest controller and handler function for user requests, and a SendGridMailer class for transforming the user's request to a SendGrid request and sending to SendGrid.
-
-![](../../.gitbook/assets/sendgrid-personal-mailer.png)
-
-#### Walkthrough
 
 The code for this microservice is a simple textbook REST service.  This is a simple blocking service so that we can explore a simpler paradigm.  Later we'll build a Webflux service when we build the Event Activity service.   Here's the basic outline of the solution:
 
 ![](../../.gitbook/assets/sendgrid-personal-controller-code.png)
 
+---
+
+
+**The client request**
+
+The client request is the input to the microservice REST API.  It's a simplified json record with the basic requirements for sending emails.  Any additional information required to build a SendGrid request are stored as configurations
+
+```javascript
+POST /email/v2/send HTTP/1.1
+Host: localhost:5000
+Content-Type: application/json
+Content-Length: 269
+
+{
+  "senderName": "me",
+  "fromAddress": "sender@gmail.com",
+  "toAddress": "receiver@gmail.com",
+  "subject": "This is my email",
+  "content": "Click here to create a click event: http://www.google.com",
+  "customArgs": {
+    "mycounter": 60000
+  }
+}
+```
 
 ---
 
 #### The Controller
 
-Starting out with the controller -- it's a simple rest service that exposes a post endpoint that our users or programs can call. 
+The controller is a simple rest service that our client calls. It handles the client request by passing it on to the main program and returning the final result back to the client.
 
 {% code title="SendGridController.java" %}
 ```java
@@ -44,28 +56,6 @@ public ResponseEntity<String> handleRequest(@RequestBody String mailRequest)  {
  }
 ```
 {% endcode %}
-
-**The user request**
-
-This User request is a simplified json record with the basic requirements for sending emails.  Any additional information required to build a SendGrid request are stored as configurations 
-
-```javascript
-POST /email/v2/send HTTP/1.1
-Host: localhost:5000
-Content-Type: application/json
-Content-Length: 269
-
-{
-  "senderName": "me",
-  "fromAddress": "sender@gmail.com",
-  "toAddress": "receiver@gmail.com",
-  "subject": "This is my email",
-  "content": "Click here to create a click event: http://www.google.com",
-  "customArgs": {
-    "mycounter": 60000
-  }
-}
-```
 
 ---
 

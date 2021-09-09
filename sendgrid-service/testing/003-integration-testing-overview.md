@@ -1,12 +1,7 @@
+####Unit testing recap
+While we were unit testing we tested all the components ***individually***.  Piecing all those individual tests together we get all the way from the start to the final call the SendGrid client.  We were looking for the way our code would respond to different inputs - we were not trying to test SendGrid's code.  
 
-
-The goal of integration testing is to test more of the overall functionality of the solution.  Unlike unit testing, our goal is to verify that the "units" of the solution work **together** to meet a business requirement
-
-
-####Unit test view
-When we were unit testing we tested all the components ***individually***.  Piecing all of the those individual tests together we get all the way from the start to the final call the SendGrid client.  We were looking for the way our code would respond to different inputs - we were not trying to test SendGrid's code.  And we did not want to actually call SendGrid and send a real email.  
-
-So at the last step - we replaced the SendGrid Client with Mockito mock of the Client and -- under the covers -- our mock was called instead of the Client  
+When we got to the mailer function we did not want to actually call SendGrid and send a real email, so we mocked the entire SendGrid client with Mockito (below)   
 
 ![](../../.gitbook/assets/unittest-mock.png)
 

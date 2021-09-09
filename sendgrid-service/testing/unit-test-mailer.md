@@ -58,7 +58,7 @@ private static Stream<Arguments> payloadProvider() {
 }
 ```
 
-We don't want to call the real API so we'll mock the api() method that calls it.  But we do want to verify what we sent to the API, so we'll use a Captor to see the Request that was passed into our mocked  api\(\)
+We don't want to call the real SendGrid API, so we'll mock the api() method that calls it.  But we do want to verify what we sent to the API, so we'll use a Captor to see the Request that was passed into our mocked api()
 
 ```text
 @Captor

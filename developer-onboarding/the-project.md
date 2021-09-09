@@ -1,19 +1,14 @@
----
-description: >-
-  We'll use a simple textbook solution to illustrate some of the components of a complete production deliverable.
----
+
+To provide continuity across the concepts I'm covering I'll use a simple 'textbook' solution to illustrate some cross-cutting components of a complete production deliverable.
+
 ![](../.gitbook/assets/sendgrid-personal-sendgrid-pipeline.png)
 
----
+#### What are we building?
 
-### What are we building?
-
-We're going to cover some skills I alluded to in the last section using a simple solution consisting of a single microservice and a feedback loop.  We'll start off with basic textbook code and gradually add in examples of a particularly interesting subject. 
-
-We are going to build a simple pipeline consisting of:
+We'll' focus on a simple pipeline consisting of:
 * [x] A blocking REST service that sends emails to a vendor (SendGrid) who then sends them to customers
-* [x] A webhook listener that received information back from the vendor and stored it in Kafka
-* [x] A connector that streams records out of Kafka and into an `AWS Athena` Database
+* [x] A webhook listener that receives information back from the vendor and stores it in Kafka
+* [x] A connector that streams records out of Kafka and into a Database
 * [x] A pyspark "sweeper" utility that picks up Dead Letter data in AWS S3 and stores it for use in AWS Athena
 
 #### Components

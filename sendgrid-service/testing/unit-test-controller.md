@@ -54,7 +54,7 @@ void handles_bad_json_format() throws Exception {
    // WHEN the client calls with  a bad json format
    var expectedStatus = HttpStatus.INTERNAL_SERVER_ERROR;
    
-   // THEN expect an internal service error
+   // THEN expect a Response object with an internal service error
    mockMvc.perform(MockMvcRequestBuilders.post("/email/v2/send")
       .contentType(MediaType.APPLICATION_JSON)
       .content("{ \"bad }")
@@ -72,7 +72,7 @@ void handles_bad_json_format() throws Exception {
 
 #### Testing the Handler outputs
 
-The controller receives outputs from the SendGrid handler To test that, we'll use the same pattern as above, but we need to mock the requestHandler so that we can get the return values we want to test.
+The controller receives outputs from the SendGrid handler.  To test that, we'll use the same pattern as above, but we need to mock the requestHandler so that we can get the return values we want to test.
 
 We'll use this pattern to test:
 1. **Any return code** Handle any return code we get from the SendgridHandler
