@@ -37,6 +37,14 @@ The controller is a simple rest service that our client calls. It handles the cl
 
 {% code title="SendGridController.java" %}
 ```java
+/*
+   You will often see examples where the Java object is passed as an object:
+   
+   * ResponseEntity<String> handleRequest(@RequestBody SendgridRequest mailRequest)
+   
+    letting Spring handle the json conversion implicitly - but some teams don't do it that way, preferring to 
+    pass in the json string and manage the conversion
+*/
 @PostMapping(path = "/send")
 public ResponseEntity<String> handleRequest(@RequestBody String mailRequest)  {
     HttpHeaders responseHeaders = new HttpHeaders();

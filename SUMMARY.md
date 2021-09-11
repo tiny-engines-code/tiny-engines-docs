@@ -20,6 +20,7 @@
   * [testing our service](sendgrid-service/testing/integration-testing.md)
   * [acceptance testing](sendgrid-service/testing/acceptance-testing-intro.md)
   * [an acceptance test](sendgrid-service/testing/acceptance-testing.md)
+  * [documenting the API](sendgrid-service/documents/swagger.md)
   * [performance testing](common/under_contstruction.md)
   * [mutation testing](common/under_contstruction.md)
   * [test coverage](common/under_contstruction.md)
