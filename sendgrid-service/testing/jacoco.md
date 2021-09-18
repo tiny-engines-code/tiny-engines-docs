@@ -37,6 +37,7 @@ In this case:
 * The `sendgrimailer.controller` package has 90% instructions coverage, and 33% of the possible logic branches traversed.
 * The (main) `sendgrimailer` package has 37% of our instructions are covered
 * The `sendgrimailer.config` package has 100% coverage
+* 
 ![](../../.gitbook/assets/jacoco/review.png)
 
 ---
@@ -73,6 +74,7 @@ jacocoTestReport {
 After adding the filter to build.gradle we re-run our tests and review the Jacoco report:
 
 ![](../../.gitbook/assets/jacoco/jacoco-gradle.png)
+
 After adding the filter we see that our overall coverage for the `sendgridmailer.service` code coverage went up to 94%.
 
 ---
@@ -93,6 +95,7 @@ public @interface Generated {
 After adding the filter we saw that our overall coverage for the `sendgridmailer.service` code coverage went up to 94%.  That's great, but drilling into the service we see that SendgridRequest is still reporting misses.   
 
 It looks as if we skipped the equals() and hashCode() functions, but the toString() method is still reporting misses.  What's going on?
+
 ![](../../.gitbook/assets/jacoco/jacoco-lobok-sticks.png)
 
 A quick look at the SendgridRequest shows us that there is no explicit **toString()** function -- it is being created by lombok -- and it's clear that Jacoco can't see these generated methods.
@@ -109,6 +112,7 @@ Our lombok.config file has the entry:
 lombok.addLombokGeneratedAnnotation = true
 ```
 and that does the trick.  Our next test run report shows that the SendgridRequest has completely dropped from the report.
+
 ![](../.gitbook/assets/jacoco/jacoco-lombok-config.png)
 
 ---
@@ -175,11 +179,13 @@ This a valid miss, and we don't want to skip it - we want to add a test to impro
     }
 ```
 After making the change we see that `sendgridmailer.service` instructions are 100% covered.   We still have some branches that are only 86% covered - but we'll stop there for now.
+
 ![](../../.gitbook/assets/jacoco/jacco-send2.png)
 
 ---
 ####Lambdas
 Our `sendgridmailer.controller` service is also looking ok at 90% but drilling into that service we see that it's our two Predicate functions that support our simplistic validation function.
+
 ![](../../.gitbook/assets/jacoco/jacoco-lambdas.png)
 
 The "punch-line" here is that we can't put a @Generated annotation on those Predicate lambdas.   We could test those lambdas directly in our test cases. but in this case we know that the validRequest() function that uses them is fully covered, and we'll make the judgement that for a simple demo we don't gain much by adding these tests.
