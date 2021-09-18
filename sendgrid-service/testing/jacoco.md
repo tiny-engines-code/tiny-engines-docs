@@ -37,7 +37,8 @@ In this case:
 * The `sendgrimailer.controller` package has 90% instructions coverage, and 33% of the possible logic branches traversed.
 * The (main) `sendgrimailer` package has 37% of our instructions are covered
 * The `sendgrimailer.config` package has 100% coverage
-* 
+
+
 ![](../../.gitbook/assets/jacoco/review.png)
 
 ---
