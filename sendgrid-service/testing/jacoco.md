@@ -13,7 +13,7 @@ id 'java'
 id 'jacoco'
 }
 ```
-
+---
 * [x] Step 2 - Run our unit test with Jacoco
 
 ```
@@ -22,24 +22,37 @@ gradle test jacocoTestReport
 
 Jacoco will create a report of the coverage our test cases achieved and place it by default in the build directory.  Click on the index.html file to get to the Jacoco report for our latest test run.
 
+
 ![](../../.gitbook/assets/jacoco/jacoco-dirs.png)
 
+---
+* [x] Step 3 - Review the Jacoco report
 
-* [x] Review the Jacoco report
+Navigate to the directory containing the index.html and open in a browser.  We'll be presented with the Jacoco coverage report.  
+
+We are presented with a line items for each package in our application.  For each package Jacoco shows package showsthe percentage of instructions that have been run, and the percentage of the possible logic branches that have been traversed.
+
+In this case:
+* The `sendgrimailer.service` package shows 61% of our instructions covered, and 22% of branches traversed.
+* The `sendgrimailer.controller` package has 90% instructions coverage, and 33% of the possible logic branches traversed.
+* The (main) `sendgrimailer` package has 37% of our instructions are covered
+* The `sendgrimailer.config` package has 100% coverage
+![](../../.gitbook/assets/jacoco/review.png)
 
 ---
 ####Filtering methods using Gradle
-The report will show how well our test cases covered the code base.  Reviewing this report we see that:
+Two packages we need to review in more depth are:
 
 * the `sendgridmailer.service` is at 61% coverage, and
 * the `sendgridmailer` app is at 37% coverage
 
-![](../../.gitbook/assets/jacoco/jacoco-first.png)
-
 Let's tackle the 61% `sendgridmailer.service` first.
 
-Drilling into the `sendgridmailer.service`, we see that the SendgridRequest is the main culprit.  There's a difference of option on whether data classes like SendgridRequest need to be tested.   We want to skip testing this class.   Let's do that now:
+Drilling into the `sendgridmailer.service`, we see that the SendgridRequest is the main culprit.  There's a difference of option on whether data classes like SendgridRequest need to be tested.   
 
+![](../../.gitbook/assets/jacoco/jacoco-first.png)
+
+We want to skip testing this class.   Let's do that now:
 
 One way of skipping coverage testing is to set filters in our build,gradle file.   We'll add the following to build.gradle and rerun our test.
 
