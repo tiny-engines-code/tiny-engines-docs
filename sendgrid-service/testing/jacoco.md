@@ -22,7 +22,7 @@ gradle test jacocoTestReport
 
 Jacoco will create a report of the coverage our test cases achieved and place it by default in the build directory.  Click on the index.html file to get to the Jacoco report for our latest test run.
 
-![](../.gitbook/assets/jacoco/jacoco-dirs.png)
+![](../../.gitbook/assets/jacoco/jacoco-dirs.png)
 
 
 * [x] Review the Jacoco report
@@ -34,7 +34,7 @@ The report will show how well our test cases covered the code base.  Reviewing t
 * the `sendgridmailer.service` is at 61% coverage, and
 * the `sendgridmailer` app is at 37% coverage
 
-![](../.gitbook/assets/jacoco/jacoco-first.png)
+![](../../.gitbook/assets/jacoco/jacoco-first.png)
 
 Let's tackle the 61% `sendgridmailer.service` first.
 
@@ -59,7 +59,7 @@ jacocoTestReport {
 
 After adding the filter to build.gradle we re-run our tests and review the Jacoco report:
 
-![](../.gitbook/assets/jacoco/jacoco-gradle.png)
+![](../../.gitbook/assets/jacoco/jacoco-gradle.png)
 After adding the filter we see that our overall coverage for the `sendgridmailer.service` code coverage went up to 94%.
 
 ---
@@ -80,7 +80,7 @@ public @interface Generated {
 After adding the filter we saw that our overall coverage for the `sendgridmailer.service` code coverage went up to 94%.  That's great, but drilling into the service we see that SendgridRequest is still reporting misses.   
 
 It looks as if we skipped the equals() and hashCode() functions, but the toString() method is still reporting misses.  What's going on?
-![](../.gitbook/assets/jacoco/jacoco-lobok-sticks.png)
+![](../../.gitbook/assets/jacoco/jacoco-lobok-sticks.png)
 
 A quick look at the SendgridRequest shows us that there is no explicit **toString()** function -- it is being created by lombok -- and it's clear that Jacoco can't see these generated methods.
 
@@ -103,7 +103,7 @@ and that does the trick.  Our next test run report shows that the SendgridReques
 
 Let's focus on the next issue in the report  -- the `sendgrid.mailer` line item is showing a 37% coverage.  Drilling down from that line shows that jacoco is complaining that we have no coverage on our main method.   We want to skipp that item as well.
 
-![](../.gitbook/assets/jacoco/jacoco-annotate-main1.png)
+![](../../.gitbook/assets/jacoco/jacoco-annotate-main1.png)
 
 We could skip the main method using the gradle filter we created earlier, but this is a great opportunity to demo the @Generated annotation we created but were not able to use. We'll add the annotation and re-run our tests.
 
@@ -122,7 +122,7 @@ public class SendgridMailerApplication {
 
 After rerunning, we get the result we want.   The overall `sendgridmailer` line item is now up to 100% coverage.
 
-![](../.gitbook/assets/jacoco/jacoco-annotate-main2.png)
+![](../../.gitbook/assets/jacoco/jacoco-annotate-main2.png)
 
 ---
 
@@ -130,7 +130,7 @@ After rerunning, we get the result we want.   The overall `sendgridmailer` line 
 
 Let's take another look at the `sengridmailer.service`  -- it's looking pretty good at 94%, but when we drilling, we see that SendgridMailer service has a method that should be tested.   
 
-![](../.gitbook/assets/jacoco/jacoco-send.png)
+![](../../.gitbook/assets/jacoco/jacoco-send.png)
 
 This a valid miss, and we don't want to skip it - we want to add a test to improve our coverage.  We add the test that coverd the missed code and re-run our tests.
 
@@ -162,12 +162,12 @@ This a valid miss, and we don't want to skip it - we want to add a test to impro
     }
 ```
 After making the change we see that `sendgridmailer.service` instructions are 100% covered.   We still have some branches that are only 86% covered - but we'll stop there for now.
-![](../.gitbook/assets/jacoco/jacco-send2.png)
+![](../../.gitbook/assets/jacoco/jacco-send2.png)
 
 ---
 ####Lambdas
 Our `sendgridmailer.controller` service is also looking ok at 90% but drilling into that service we see that it's our two Predicate functions that support our simplistic validation function.
-![](../.gitbook/assets/jacoco/jacoco-lambdas.png)
+![](../../.gitbook/assets/jacoco/jacoco-lambdas.png)
 
 The "punch-line" here is that we can't put a @Generated annotation on those Predicate lambdas.   We could test those lambdas directly in our test cases. but in this case we know that the validRequest() function that uses them is fully covered, and we'll make the judgement that for a simple demo we don't gain much by adding these tests.
 
