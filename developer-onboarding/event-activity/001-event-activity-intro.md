@@ -1,5 +1,14 @@
 
-When we submit a request to SendGrid we get an immediate response that the request was received.  We can also get asynchronous `event activity` messages from Sendgrid about the delivery progress and how the recipient interacted with the email.
+####What are we building
+
+The (SendGrid) Event Activity service is a REST microservice that
+
+* [x] accepts information from SendGrid's webhook service (SendGrid Webhooks)
+* [x] publishes that information to a Kafka queue
+* [x] performs minimal formatting of data or the payload
+ 
+####Background
+  When we submit a request to SendGrid we get an immediate response that the request was received.  We can also get asynchronous `event activity` messages from Sendgrid about the delivery progress and how the recipient interacted with the email.
 
 In order to get these we need to set up a REST 'endpoint' that listens for the messages, and we need to tell Sendgrid to send the messages to our endpoint.
 
