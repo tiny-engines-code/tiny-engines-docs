@@ -92,7 +92,7 @@ public @interface Generated {
 }
 ```
 ---
-####Filtering Lomobk methods
+####Filtering Lombok methods
 After adding the filter we saw that our overall coverage for the `sendgridmailer.service` code coverage went up to 94%.  That's great, but drilling into the service we see that SendgridRequest is still reporting misses.   
 
 It looks as if we skipped the equals() and hashCode() functions, but the toString() method is still reporting misses.  What's going on?
@@ -114,7 +114,7 @@ lombok.addLombokGeneratedAnnotation = true
 ```
 and that does the trick.  Our next test run report shows that the SendgridRequest has completely dropped from the report.
 
-![](../.gitbook/assets/jacoco/jacoco-lombok-config.png)
+![](../../.gitbook/assets/jacoco/jacoco-lombok-config.png)
 
 ---
 #### Revisiting the @Generated annotation
