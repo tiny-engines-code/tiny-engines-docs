@@ -150,7 +150,7 @@ Let's take another look at the `sengridmailer.service`  -- it's looking pretty g
 
 ![](../../.gitbook/assets/jacoco/jacoco-send.png)
 
-This a valid miss, and we don't want to skip it - we want to add a test to improve our coverage.  We add the test that coverd the missed code and re-run our tests.
+This a valid miss, and we don't want to skip it - we want to add a test to improve our coverage.  We add the test that coverd the missed code and re-run our tests.   We'll do this by adding an alternate profile to our test application-test.properties file where the api key is not configured.  When we call the `send()` method, our API key will be null.
 
 ```java 
     @Test
