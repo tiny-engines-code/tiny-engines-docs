@@ -50,11 +50,11 @@ Two packages we need to review in more depth are:
 
 Let's tackle the 61% `sendgridmailer.service` first.
 
-Drilling into the `sendgridmailer.service`, we see that the SendgridRequest is the main culprit.  There's a difference of option on whether data classes like SendgridRequest need to be tested.   
+Drilling into the `sendgridmailer.service`, we see that the SendgridRequest is the main culprit.  
 
 ![](../../.gitbook/assets/jacoco/jacoco-first.png)
 
-We want to skip testing this class.   Let's do that now:
+We want to skip testing this class.   Let's do that now.
 
 One way of skipping coverage testing is to set filters in our build,gradle file.   We'll add the following to build.gradle and rerun our test.
 
@@ -91,33 +91,6 @@ public @interface Generated {
 
 }
 ```
----
-####Filtering Lombok methods
-After adding the filter we saw that our overall coverage for the `sendgridmailer.service` code coverage went up to 94%.  That's great, but drilling into the service we see that SendgridRequest is still reporting misses.   
-
-It looks as if we skipped the equals() and hashCode() functions, but the toString() method is still reporting misses.  What's going on?
-
-![](../../.gitbook/assets/jacoco/jacoco-lobok-sticks.png)
-
-A quick look at the SendgridRequest shows us that there is no explicit **toString()** function -- it is being created by lombok -- and it's clear that Jacoco can't see these generated methods.
-
-But wait -- with a Lombok method there's no obvious place to put a @Generated annotation on.  So how can we annotate a method we can't see?    
-
-Well ... we can't.  
-
-We'll use the @Generated annotation later, but for Lombok methods we do something a little different -- we tell Lombok to add the annotation for us by creating a lombok.cong file in our root directory and use that to tell lombok to add a @Generated annotation to the lombok-generated methods.  
-
-Our lombok.config file has the entry:
-
-```text
-lombok.addLombokGeneratedAnnotation = true
-```
-and that does the trick.  Our next test run report shows that the SendgridRequest has completely dropped from the report.
-
-![](../../.gitbook/assets/jacoco/jacoco-lombok-config.png)
-
----
-#### Revisiting the @Generated annotation
 
 Let's focus on the next issue in the report  -- the `sendgrid.mailer` line item is showing a 37% coverage.  Drilling down from that line shows that jacoco is complaining that we have no coverage on our main method.   We want to skipp that item as well.
 
@@ -144,15 +117,53 @@ After rerunning, we get the result we want.   The overall `sendgridmailer` line 
 
 ---
 
+####Filtering Lombok methods
+
+Let's go back to the `sendgridmailer.service` package. After adding the filter we saw that our overall coverage for the `sendgridmailer.service` code coverage went up to 94%.  That's great, but drilling into the service we see that SendgridRequest is still reporting misses.   
+
+When we created the gradle filter we skipped the equals() and hashCode() functions, but the toString() method is still reporting misses.  What's going on?
+
+![](../../.gitbook/assets/jacoco/jacoco-lobok-sticks.png)
+
+A quick look at the SendgridRequest shows us that there is no explicit **toString()** function -- it is being created by lombok -- and it's clear that Jacoco can't see these generated methods.
+
+But wait -- with a Lombok method there's no visible method to put a @Generated annotation on.  So how can we annotate a method we can't see?    
+
+Well ... we can't.  
+
+For Lombok methods we do something a little different -- we tell Lombok to add the annotation for us.
+
+We can accomplish that by creating a lombok.cong file in our root directory and use that to tell lombok to add a @Generated annotation to the lombok-generated methods.  
+
+Our lombok.config file has the entry:
+
+```text
+lombok.addLombokGeneratedAnnotation = true
+```
+and that does the trick.  Our next test run report shows that the SendgridRequest has completely dropped from the report.
+
+![](../../.gitbook/assets/jacoco/jacoco-lombok-config.png)
+
+---
+
 ####Adding more tests
 
 Let's take another look at the `sengridmailer.service`  -- it's looking pretty good at 94%, but when we drilling, we see that SendgridMailer service has a method that should be tested.   
 
 ![](../../.gitbook/assets/jacoco/jacoco-send.png)
 
-This a valid miss, and we don't want to skip it - we want to add a test to improve our coverage.  We add the test that coverd the missed code and re-run our tests.   We'll do this by adding an alternate profile to our test application-test.properties file where the api key is not configured.  When we call the `send()` method, our API key will be null.
+This a valid miss, and we don't want to skip it - we want to add a test to improve our coverage.  We add the test that coverd the missed code and re-run our tests.   
+
+We'll do this by adding an alternate profile to our test application-test.properties file where the api key is not configured.  When we call the `send()` method, our API key will be null.
 
 ```java 
+
+@ExtendWith(MockitoExtension.class)
+@ActiveProfiles("test")      // this alternate application-test.properties file set the api ket to null
+class SendGridMailerAltPropsTest {
+
+   ...more
+
     @Test
     void validates_null_key_returns_500() throws IOException {
         // mock the API
