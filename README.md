@@ -1,4 +1,5 @@
-[Personal Website Home](https://chrislomeli.gatsbyjs.io/)
+ * [Personal Website Home](https://chrislomeli.gatsbyjs.io/)
+ * [Code for this site](https://github.com/tiny-engines-code)
 
 ---
 

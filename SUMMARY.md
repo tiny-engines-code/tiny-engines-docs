@@ -14,28 +14,31 @@
 
 * [motivation](developer-onboarding/onboarding-intro.md)
 * [the project](developer-onboarding/the-project.md)
+
+---
 #### The mailer service
 * [the mailer service](sendgrid-service/code/sendgrid-mailer-intro.md)
-* [setup](sendgrid-service/code/sendgrid-setup.md)
+* [mailer setup](sendgrid-service/code/sendgrid-setup.md)
 * [walk-through](sendgrid-service/code/code-review.md)
 * [unit testing](sendgrid-service/testing/002-unit-test-intro.md)
 * [testing the controller](sendgrid-service/testing/unit-test-controller.md)
 * [testing the handler](sendgrid-service/testing/unit-test-handler.md)
 * [testing the mailer](sendgrid-service/testing/unit-test-mailer.md)
 * [integration testing](sendgrid-service/testing/003-integration-testing-overview.md)
-* [testing our service](sendgrid-service/testing/integration-testing.md)
+* [integration example](sendgrid-service/testing/integration-testing.md)
 * [acceptance testing](sendgrid-service/testing/acceptance-testing-intro.md)
-* [an acceptance test](sendgrid-service/testing/acceptance-testing.md)
+* [acceptance example](sendgrid-service/testing/acceptance-testing.md)
 * [documenting the API](sendgrid-service/documents/swagger.md)
 * [test coverage](sendgrid-service/testing/jacoco.md)
 * [performance testing](common/under_contstruction.md)
 * [mutation testing](common/under_contstruction.md)
 * [grammar checking](common/under_contstruction.md)
+
 ---
 #### The event webhook
 * [the event listener](developer-onboarding/event-activity/001-event-activity-intro.md)
 * [design](developer-onboarding/event-activity/event_activity-design.md)
-* [setup](developer-onboarding/event-activity/event-activity-setup.md)
+* [webhook setup](developer-onboarding/event-activity/event-activity-setup.md)
 * [walk-through](developer-onboarding/event-activity/event-activity-code.md)
 * [testing](common/under_contstruction.md)
 * [the kafka connector](developer-onboarding)
