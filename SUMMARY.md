@@ -15,7 +15,7 @@
 * [motivation](developer-onboarding/onboarding-intro.md)
 * [the project](developer-onboarding/the-project.md)
 #### The mailer service
-* [intro](sendgrid-service/code/sendgrid-mailer-intro.md)
+* [the mailer service](sendgrid-service/code/sendgrid-mailer-intro.md)
 * [setup](sendgrid-service/code/sendgrid-setup.md)
 * [walk-through](sendgrid-service/code/code-review.md)
 * [unit testing](sendgrid-service/testing/002-unit-test-intro.md)
@@ -31,9 +31,9 @@
 * [performance testing](common/under_contstruction.md)
 * [mutation testing](common/under_contstruction.md)
 * [grammar checking](common/under_contstruction.md)
-
+---
 #### The event webhook
-* [intro](developer-onboarding/event-activity/001-event-activity-intro.md)
+* [the event listener](developer-onboarding/event-activity/001-event-activity-intro.md)
 * [design](developer-onboarding/event-activity/event_activity-design.md)
 * [setup](developer-onboarding/event-activity/event-activity-setup.md)
 * [walk-through](developer-onboarding/event-activity/event-activity-code.md)
