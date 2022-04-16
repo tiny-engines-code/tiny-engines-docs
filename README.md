@@ -9,9 +9,12 @@
  - demo's 
  - other training and presentations 
  over the last few years that I've copied to a common tiny-engines organization
+---
+ 
+#### Use the left navbar to browse contents, including:
 
 ---
-* Onboarding project
+* An "Onboarding" project
   * A Springboot mailer micro-service
   * A webhook/Kafka streaming event listener
 ---
