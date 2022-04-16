@@ -60,9 +60,8 @@ def read_json_streaming(spark: SparkSession, input_folder: str):
     raw = spark.readStream.schema(input_schema).json(input_folder)
     return transform_ses_records(raw)
 
-
-
 ```
+
 
 ### transformer.py
 
@@ -124,3 +123,6 @@ def write_stream_to_filestream(mail_df: DataFrame, mail_folder: str, checkpoint_
         .start() \
         .awaitTermination()
 ```
+
+The streaming writer creates a checkpoint that lets us come back to the last processed record.  Even if we are using it for batch files - it will keep track of the last record written and pick up where it left off.
+![](../../.gitbook/assets/pyspark/pyspark-streaming.png)

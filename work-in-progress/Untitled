@@ -1,0 +1,25 @@
+API-GATEWAY	8765
+CURRENCY-CONVERSION-SERVICE	8100
+CURRENCY-EXCHANGE-SERVICE	8000 and another one at 8001
+
+
+direct
+http://localhost:8000/currency-exchange/from/USD/to/INR
+http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/100
+
+api gateway -with routing
+http://localhost:8765/currency-exchange/from/USD/to/INR
+http://localhost:8765/currency-conversion/from/USD/to/INR/quantity/100
+
+
+https://github.com/in28minutes/spring-microservices-v2/tree/main/04.docker
+
+
+
+
+
+implementation 'org.springframework.boot:spring-boot-starter-amqp'
+implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
+implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+testImplementation 'org.springframework.boot:spring-boot-starter-test'
+testImplementation 'org.springframework.amqp:spring-rabbit-test'
