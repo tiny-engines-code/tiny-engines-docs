@@ -3,6 +3,20 @@
 
 ---
 
-##This site is a collection of informal code walk-through, meetups, demo's and other training and presentations over the last few years that I've migrated to a common organization  
+####This site is a collection of 
+ - informal code walk-throughs, 
+ - meetups, 
+ - demo's 
+ - other training and presentations 
+ over the last few years that I've copied to a common tiny-engines organization
 
-![](.gitbook/assets/oldtrain.jpg) 
+---
+* Onboarding project
+  * A Springboot mailer micro-service
+  * A webhook/Kafka streaming event listener
+---
+* Several Walkthroughs
+  * Spark streaming example
+  * Kafka publisher tutorials
+  * Java futures examples
+
