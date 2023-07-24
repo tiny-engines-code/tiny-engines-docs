@@ -254,34 +254,31 @@ For example:
 SQL
 ```sql
 with players as (
-  select distinct game_id,  player_id, team
-  from controls.player_participation
+    select distinct game_id,  player_id, team
+    from controls.player_participation
 ),
      events as (
-       select pe.season, pe.week, pe.game_id, pp.team, pe.player_id, pe.event, pe.lineup
-       from controls.player_events pe
-              left join players pp on (pp.player_id = pe.player_id and pp.game_id = pe.game_id)
+         select pe.season, pe.week, pe.game_id, pp.team, pe.player_id, pe.event, pe.lineup
+         from controls.player_events pe
+                  left join players pp on (pp.player_id = pe.player_id and pp.game_id = pe.game_id)
      )
 SELECT
-  team,
-  SUM(CASE WHEN event = 'fumble' THEN 1 else 0 END) AS fumble,
-  SUM(CASE WHEN event = 'safety' THEN 1 else 0 END) AS safety,
-  SUM(CASE WHEN event = 'tackle' THEN 1 else 0 END) AS tackle,
-  SUM(CASE WHEN event = 'qb_hit' THEN 1 else 0  END) AS qb_hit,
-  SUM(CASE WHEN event = 'interception' THEN 1 else 0 END) AS interception,
-  SUM(CASE WHEN event = 'sack' THEN 1 else 0 END) AS sack,
-  SUM(CASE WHEN event = 'field_goal' THEN 1 else 0  END) AS field_goal
+    team,
+    SUM(CASE WHEN event = 'qb_hit' THEN 1 else 0  END) AS qb_hit,
+    SUM(CASE WHEN event = 'sack' THEN 1 else 0 END) AS sack,
+    SUM(CASE WHEN event = 'fumble_recovery' THEN 1 else 0 END) AS fumble,
+    SUM(CASE WHEN event = 'field_goal' THEN 1 else 0  END) AS field_goal
 FROM events where game_id = '2021_02_MIN_ARI'
 group by team;
 ```
 Results
 
-We want two records for that single game, one from the point of view of the Vikings and one from the point of view of the Cardinals.  This is important because we want to be able to generalize those stats to other situations by team.  
+We want two records for that single game, one from the point of view of the Vikings and one from the point of view of the Cardinals.  This is important because we want to be able to generalize those stats to other situations by team.
 
-| team | fumble | safety | tackle | qb\_hit | interception | sack | field\_goal |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| ARI | 3 | 0 | 63 | 4 | 0 | 1 | 0 |
-| MIN | 3 | 0 | 70 | 3 | 2 | 3 | 0 |
+| team | qb\_hit | sack | fumble_recovery | field\_goal |
+| :--- | :--- | :--- |:----------------| :--- |
+| ARI | 4 | 1 | 0               | 0 |
+| MIN | 3 | 3 | 1               | 0 |
 
 
 <br>
@@ -298,19 +295,20 @@ The player participation dataset contains all the player contribution to a given
 We want to be able to join, aggregate and count these contributions to the game.  One way to do that is to explode the arrays into separate rows to create our version of the player_participation table.  We can then join this table to the other tables on player_id.  For example, we can get the player information for the defense players in the above example: 
 
 ```sql
-select R.game_id, R.team, R.player_id, R.lineup,  P.display_name
+select R.player_id, R.team,  P.display_name, R.lineup
 from controls.player_participation R
- join controls.players P on P.player_id=R.player_id
- where game_id='2022_01_BUF_LA' and play_id='2022_01_BUF_LA_41' and lineup='defense'
- order by play_id
+       join controls.players P on P.player_id=R.player_id
+where game_id='2022_01_BUF_LA'
+  and play_id='2022_01_BUF_LA_41'
+  and lineup='defense'
+order by play_id
 limit 3
 ```
-
-|game\_id | play | team | player\_id | lineup | display\_name |
-|:--- |:-----|:-----| :--- | :--- | :--- |
-|2022\_01\_BUF\_LA | 1    | BUF  | 00-0031787 | defense | Jake Kumerow |
-|2022\_01\_BUF\_LA | 1    | BUF  | 00-0035352 | defense | Tyrel Dodson |
-|2022\_01\_BUF\_LA | 1    | BUF  | 00-0037318 | defense | Baylon Spector |
+| player\_id | team | display\_name | lineup |
+| :--- | :--- | :--- | :--- |
+| 00-0031787 | BUF | Jake Kumerow | defense |
+| 00-0035352 | BUF | Tyrel Dodson | defense |
+| 00-0037318 | BUF | Baylon Spector | defense |
 
 
 <br>
@@ -410,7 +408,7 @@ def correlate_to_target(df: pd.DataFrame, target_column: str, top_n: int) -> (pd
 
 example offense correlation to win/loss from [Feature selection notebook](../../notebooks/nfl_load_nflverse_feature_selection_demo.ipynb)
 
-<img src="../.gitbook/assets/NFL/correlations.png" width="1000" height="900" />
+<img src="../.gitbook/assets/NFL/correlations.png" />
 
 ### use xgboost to get feature importance
 
@@ -451,7 +449,7 @@ def calc_feature_importance(X: pd.DataFrame, y: pd.Series, top_n=30) -> (pd.Data
 
 example from [Feature selection notebook](../../notebooks/nfl_load_nflverse_feature_selection_demo.ipynb)
 
-<img src="../.gitbook/assets/NFL/feature_importance.png" width="1000" height="900" />
+<img src="../.gitbook/assets/NFL/feature_importance.png"/>
 
 
 ### merge the new offense and defense features with the core play-by-play data
@@ -670,7 +668,7 @@ This chart shows how the model learned the data over several iterations (epochs)
 
 - The accuracy metric - how well the model predicted on the validations set - was also ok, but I still have some concern about how high the validation split accuracy started almost immediately, and although it did improve, the improvement was not smooth or deep.  
 
-<img src="../.gitbook/assets/NFL/ml_loss_accuracy.png" width="1200" height="600" />
+<img src="../.gitbook/assets/NFL/ml_loss_accuracy.png" width="2000" height="600" />
 
 ##### The explainer
 The SHAP explainer helps us to understand what features the model learned were important to make predictions. 
@@ -680,7 +678,7 @@ Looking at what the model chose, I think that many of the nflverse features are 
 It might help to explain some of the features seen in the chart:  In order to be able to offset the stats of any two teams I needed to combine their stats together in one record.  That's why we see for example 'carries_aop' and 'carries_hop' - these represent the 'carries' of the **away** team (suffixed by _aop) and the carries of the **home** team (suffixed by _hop) .  The same is true for the defensive stats.  The 'home' and 'away' monikers are not important - they could just as easily been 'my_team', 'your_team', but 'home' and 'away' were easy to implement. The important thing is that the model is able to learn the difference between any two teams and offset the stats accordingly.
 
 
-<img src="../.gitbook/assets/NFL/ml_shap.png" width="1100" height="900" />
+<img src="../.gitbook/assets/NFL/ml_shap.png" />
 
 
 ##### 'Predicting' the 2022 season
