@@ -89,7 +89,7 @@ There are five overall steps to the ETL job:
 - [x] perform feature selection `perform_team_week_feature_selection()` - this job performs feature selection on the data
 - [x] merge the features `merge_team_week_features()` - this job merges the features with the core play-by-play data
 
-<img src="../.gitbook/assets/NFL/nfl.png" width="1000" height="400" />
+<img src="../.gitbook/assets/NFL/nfl.png" width="1300" height="500" />
 
 These steps slot into two major jobs:
 
