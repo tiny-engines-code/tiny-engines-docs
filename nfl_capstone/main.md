@@ -54,50 +54,56 @@ For data, I looked at a few options and ultimately decided to stick to the NFLVe
 
 Here's thier GitHub site: [GitHub repository](https://github.com/nflverse)
 
-Nflverse provides a wide variety of table and schemas ranging from a play-by-play breakdown to which officials participated in which games.  The site is large and I found it a little difficult to navigate, but the basic data can be found here [nflverse-data](https://github.com/nflverse/nflverse-data/releases).   They also provide schemas for the data, which is very helpful.  I've stored a copy of the schemas in this project under the /docs folder because I can't seem to find them again after first discovering them. The data itself is provided in a wide format, which is sensible for publishing, but I think needs to be transformed to perform any experiments.  I'll explain why later.
+Nflverse provides a wide variety of table and schemas ranging from a play-by-play breakdown to which officials participated in which games.  The site is large and I found it a little difficult to navigate, but the basic data can be found here: [nflverse data](https://github.com/nflverse/nflverse-data/releases).   They also provide schemas for the data, which is very helpful.  I've stored a copy of the schemas in this project under the /docs folder because I can't seem to find them again after first discovering them. The data itself is provided in a wide format, which is sensible for publishing, but I think needs to be transformed to perform any experiments.  I'll explain why later.
 
 The data that I decided to use for this initial projects was:
 
-|data|seasons| description| schema|
-| --- | --- | --- | --- | 
-| pbp (play-by-play) | 2016-2022 | Play-by-play data from the nflverse package | [schema](../nflverse_schemas/dictionary_pbp.csv)|
-| pbp_participation | 2016-2022 | For each play this provide the arrays of offense and defense plays on that play | [schema](../nflverse_schemas/dictionary_participation.csv)|
-| player_stats | 2016-2022 | Provides statistics for each player  | [schema](../nflverse_schemas/dictionary_playerstats.csv)|
-| players | 2016-2022 | Player position and ID mappings  | |
-| injuries | 2016-2022 | Player injuries |[schema](../nflverse_schemas/dictionary_injuries.csv)|
-| nextgen stats | 2016-2022 | Next gen stats for passing and rushing - I thought that receiving an passing would be redundant for my pupose | [schema](../nflverse_schemas/dictionary_nextgenstats.csv)|
-| pfr_advstats | 2016-2022 | Advanced stats from pro-football-reference.com | |
+|data| description|
+| --- | --- | 
+| pbp (play-by-play)  | Play-by-play data from the nflverse package | 
+| pbp_participation | For each play this provide the arrays of offense and defense plays on that play |
+| player_stats | Provides statistics for each player  |
+| players| Player position and ID mappings  | |
+| injuries | Player injuries |
+| nextgen stats | Next gen stats for passing and rushing - I thought that receiving an passing would be redundant for my pupose|
+| pfr_advstats  | Advanced stats from pro-football-reference.com | 
 
 
+My copy of the nflverse schemas (I can't locate the nflverse originals) is here:  [nflverse schemas](https://github.com/cjlcoursework/nflverse_project/tree/14786c6c93beb48f63fd321036c0f2882376921b/doc/nflverse_schemas)
 
-# ETL workflows
+
+# ETL
 
 ## Stubs and shortcuts
-A good software implementation will have a few common side-cars that are not part of the core implementation, but are necessary for the software to run.  These are things like configuration, logging, alerts, etc.  I'm not going to spend a lot of time on these because they are not the focus of the project. 
+A software implementation will typically have a few common side-cars that are not part of the core implementation but are necessary for the software to run.  These are things like configuration, logging, alerts, etc.  I'm not going to spend a lot of time on these because they are not the focus of the project. 
 
 I'm just going to use some very simple stubs and shortcuts to get the job done.  I'll list them here, but I won't go into detail.
-- **configuration** - I'm just using one very rudimentary configuration python configuration file: [config.py](../../src/config.py)
+- **configuration** - I'm just using one very rudimentary configuration python configuration file: [config.py](https://github.com/cjlcoursework/nflverse_project/blob/14786c6c93beb48f63fd321036c0f2882376921b/src/configs.py)
 - **alerts** - incidents are all sent to subroutines that don't do anythin but log to the console
 - **logging** - I'm just using the python logging library to log to the console
 - **streaming** - I'm not using any streaming or messaging services
 - **API** - I'm not creating any API's yet, but as a next step I do plan to create a simple API to serve the model. I'll re-use existing games to feed the API a game at a time. I've already used those games for my test set, so we'll just be able to test the mechanics of the API, not the model itself.
 
-## ETL jobs
-The ETL is 'job' focused, meaning that downloading, imputing, and validating the nflverse files would happen autonomously - without manual intervention.  The ETL is orchestrated by the nfl_main.py script, which is also meant to run autonomously.
+## ETL Jobs
+The ETL for this project is 'job' focused, meaning that downloading, imputing, and validating the nflverse files happens in Python code autonomously without manual intervention.  The ETL is orchestrated by the nfl_main.py script, which is also meant to run autonomously.
 
 One can argue that feature selection is not really an ETL job, but I'm going to include it because it is automated at this point and could be a source of validation when I re-pull the data from nflverse - the 'best' features should remain the same - or else the model may have drifted.  
 
 There are two 'ETL' notebooks provided with this project (nfl_load_nflverse_data_demo.ipynb and nfl_perform_feature_selection_demo.ipynb). They are meant as a demo of the ETL job steps. They are just calling job steps manually.  And they overlap:  nfl_perform_feature_selection_demo is re-running the feature selection job for additional visuals.
 
-## The workflow
+Find them in the notebooks section of the project: [notebooks](https://github.com/cjlcoursework/nflverse_project/tree/14786c6c93beb48f63fd321036c0f2882376921b/notebooks)
+
+
+## ETL Workflow
 There are five overall steps to the ETL job:
--[x] download the data: `read_nflverse_datasets()` - this is the main job that downloads the data from nflverse
+
+- [x] download the data: `read_nflverse_datasets()` - this is the main job that downloads the data from nflverse
 - [x] create the database: `create_nfl_database()` - this job creates the database and tables
 - [x] prepare the weekly stats `prepare_team_week_dataset()` - this job merges the data into a single dataset
 - [x] perform feature selection `perform_team_week_feature_selection()` - this job performs feature selection on the data
 - [x] merge the features `merge_team_week_features()` - this job merges the features with the core play-by-play data
 
-<img src="../../images/nfl.png" width="1000" height="400" />
+<img src="../.gitbook/assets/NFL/NFL/nfl.png" width="1000" height="400" />
 
 These steps slot into two major jobs:
 
@@ -105,7 +111,7 @@ The first is getting the data from nflverse into local 'data-at-rest'.  This is 
 1. download the data: `read_nflverse_datasets()` - this is the main job that downloads the data from nflverse
 2. create the database: `create_nfl_database()` - this job creates the database and tables
 
-Why do we need a database?  It's an arguable choice, but I'm coming from the point of view that we don't really know how to use the data yet, and so the data needs to 'serve' several different experiments.  In any of those experiences we would need to split up the monolithic datasets into more joinable sets that are the right level of cardinality and for which the imputations and other cleaning steps are not changing.  So I'm creating a small data 'pond' for this data.  I'm not going to over-engineer or even normalize it at this point, but I am going to break it up into dimensions and facts that I can join together in different ways. 
+Why do we need a database?  It's an arguable choice, but the data needs to 'serve' several different experiments.  In any of those experiences we would need to split up the monolithic datasets into more joinable sets that are the right level of cardinality and for which the imputations and other cleaning steps are not changing.  So rather than having a overly complex filesystem I'm creating a small data 'pond' for this project. 
 
 Once we have the data in an NFL database, we can query and prepare the data for experiments as outlined in the code block below.  I'm going to focus on experiment 2 at this point.  We prepare for the experiment 2 model in three steps:
 1. prepare the weekly stats `prepare_team_week_dataset()` - this job merges the data into a single dataset
@@ -146,9 +152,10 @@ if __name__ == '__main__':
 
 ## Reading the nflverse data 
 
-Notebook: [nfl_00_load_nflverse_data](https://github.com/cjlcoursework/nflverse_project/blob/c6ebaa24db6d7f3b7a3f5a755822307b2be3b23e/src/nfl_00_load_nflverse_data.py)
+Code: [nfl_00_load_nflverse_data](https://github.com/cjlcoursework/nflverse_project/blob/c6ebaa24db6d7f3b7a3f5a755822307b2be3b23e/src/nfl_00_load_nflverse_data.py)
 
-There's nothing fancy here.  The goal is to get the data from nflverse to my location without risk that something goes wrong.  If something does go wrong at this stage the only thing we need to troubleshoot is the download itself, not any transformations.  I played with asynchronous downloads, but given the data size it was not worth the added complexity.  The data is not that big and the download is not that slow.  I just used the requests library to download the data.  I did incorporate a Thread pool executor, but honestly I think that was more for fun than practicality.
+There's nothing fancy here.  The goal is to get the data from nflverse to my location without risk that something goes wrong.  If something does go wrong at this stage the only thing we need to troubleshoot is the download itself.  
+
 
 
 # Database creation
@@ -158,7 +165,7 @@ There's nothing fancy here.  The goal is to get the data from nflverse to my loc
 - The trade-off is that the data is wide and is not normalized in any way.  This could be fine for a modern wide-column store like Redshift or Snowflake, but the data is also sparse, with lots of nulls that should not be imputed - they have meaning - but only in certain cases.
 
 <blockquote>
-For example there can be a column like "field_goal_result" that will be null for every play where there was not a field_goal_attempt.  But that data is important for the plays where there was a field goal attempt.  The best positioning for that data is either as an aggregated counter as we do in this project, or as a separate dimension - I did not need to normalize that far in this project  
+For example we can have a column like "field_goal_result" that will be null for every play where there was not a field_goal_attempt.  But that data should not be removed - it's important for the plays where there was a field goal attempt.  The best use for that data is either as an aggregated counter as we do in this project, or as a separate dimension - I did not need to normalize that far in this project  
 </blockquote>
 
 I've already described why I think a database is appropriate for this project, so let's take a shallow dive into the design next.
@@ -171,63 +178,53 @@ Overall, here is the way I dimensioned the nflverse data
 <table>
   <tr>
     <td style="vertical-align: top;"><strong>table</strong></td>
-    <td style="vertical-align: top;"><strong>nflverse source</strong></td>
     <td style="vertical-align: top;"><strong>description</strong></td>
   </tr>
   <tr>
-    <td style="vertical-align: top;">play_actions</td>
-    <td style="vertical-align: top;">pbp</td>
+    <td style="vertical-align: top;">play_actions (from pbp)</td>
     <td style="vertical-align: top;">extract just the play-level 'facts' for a given game, such as drive, down, <strong>yards to go</strong> and perform minor enrichment like adding <strong>yards_to_goal</strong> by parsing yard line data</td>
   </tr>
   <tr>
-    <td style="vertical-align: top;">player_participation</td>
     <td style="vertical-align: top;">player_participation</td>
     <td style="vertical-align: top;">explode player_id columns so we can join to player_events and player_stats by player_id</td>
   </tr>
 
   <tr>
-    <td style="vertical-align: top;">play_analytics</td>
-    <td style="vertical-align: top;">pbp</td>
+    <td style="vertical-align: top;">play_analytics (pbp)</td>
     <td style="vertical-align: top;">extract probabilities, epa, wpa, etc. for each play</td>
   </tr>
   <tr>
     <td style="vertical-align: top;">player_events</td>
-    <td style="vertical-align: top;">pbp</td>
     <td style="vertical-align: top;">within a single row there are several player events. For example: <br> - qb_hit_player_id 00001 might have sacked the QB <br> - fumble_player_id 00002 fumbled the ball <br> <br> We pull all of these out, merging with players and participation data to create a record that can be joined to other data as described below</td>
   </tr>
 
   <tr>
-    <td style="vertical-align: top;">game_info</td>
-    <td style="vertical-align: top;">pbp</td>
+    <td style="vertical-align: top;">game_info (pbp)</td>
     <td style="vertical-align: top;">game level information, such as teams, coaches, weather, stadium, etc, </td>
   </tr>
 
   <tr>
-    <td style="vertical-align: top;">player_stats</td>
     <td style="vertical-align: top;">player_stats</td>
     <td style="vertical-align: top;">minor cleanup; no structural changes</td>
   </tr>
 
   <tr>
     <td style="vertical-align: top;">adv_stats_def<br>adv_stats_pass<br>adv_stats_rec<br>adv_stats_rush<br></td>
-    <td style="vertical-align: top;">pfr_advstats ...</td>
     <td style="vertical-align: top;">minor cleanup; no structural changes</td>
   </tr>
 
   <tr>
     <td style="vertical-align: top;">nextgen_stats_passing<br>nextgen_stats_receiving<br>nextgen_stats_rushing</td>
-    <td style="vertical-align: top;">next_gen_stats ...</td>
     <td style="vertical-align: top;">rolled-up to the week level where they can be joined to play or game level data</td>
   </tr>
 
   <tr>
     <td style="vertical-align: top;">players</td>
-    <td style="vertical-align: top;">players</td>
     <td style="vertical-align: top;">minor cleanup; no structural changes</td>
   </tr>
 </table>
 
-### Significant conversions
+### Noteworthy conversions
 
 ### <font color=teal>Play by play (pbp)</font>
 The pbp table is a wealth of information that contains every play for every week in every season.  It's delivered as a wide sparse table with information at different cardinality.
@@ -236,8 +233,11 @@ for example every single play has redundant information about the season, week, 
 
 In other cases there's alot of sparse data as explained above.  We'll split that into a single core 'facts' table and several roughly designed dimensions.  I say roughly designed because I'm not going to over-normalize the data at this point.  I'm just going to split it up into dimensions and facts that I can join together in different ways.
 
+The play_actions, player_events, player_analytics, and game_info tables are all extracted from pbp
+
+
 ### <font color=teal>Play actions</font>
-The play_actions table is a subset of the pbp table.  It contains the play-level facts for a given game, such as drive, down, yards to go and perform minor enrichment like adding yards_to_goal by parsing yard line data.  The play_actions table is the core 'fact' table for the play-by-play data, although it is too wide for a real fact table.  It's more like a fact table with a few dimensions embedded in it, but it is the core data that we'll build features around.
+The play_actions table is the core 'facts' from the pbp table.  It contains the play-level facts for a given game, such as drive, down, yards to go and perform minor enrichment like adding yards_to_goal by parsing yard line data.  Sparse data columns are removed from this view.  It's more like a fact table with a few dimensions embedded in it, but it is the core data that we'll build features around.
 
 ### <font color=teal>Player events</font>
 within a single play-by-play row there are several player events. A few example columns are:
@@ -268,16 +268,16 @@ For example:
 SQL
 ```sql
 with players as (
-  select distinct game_id,  player_id, team 
+  select distinct game_id,  player_id, team
   from controls.player_participation
 ),
-events as (
-       select pe.season, pe.week, pe.game_id, pp.team, pe.player_id, pe.event, pe.lineup 
+     events as (
+       select pe.season, pe.week, pe.game_id, pp.team, pe.player_id, pe.event, pe.lineup
        from controls.player_events pe
-       left join players pp on (pp.player_id = pe.player_id and pp.game_id = pe.game_id)
-)
+              left join players pp on (pp.player_id = pe.player_id and pp.game_id = pe.game_id)
+     )
 SELECT
-  season, week, team, game_id,
+  team,
   SUM(CASE WHEN event = 'fumble' THEN 1 else 0 END) AS fumble,
   SUM(CASE WHEN event = 'safety' THEN 1 else 0 END) AS safety,
   SUM(CASE WHEN event = 'tackle' THEN 1 else 0 END) AS tackle,
@@ -286,17 +286,16 @@ SELECT
   SUM(CASE WHEN event = 'sack' THEN 1 else 0 END) AS sack,
   SUM(CASE WHEN event = 'field_goal' THEN 1 else 0  END) AS field_goal
 FROM events where game_id = '2021_02_MIN_ARI'
-group by season, week, team, game_id
-order by season desc, team, week;
+group by team;
 ```
 Results
 
 We want two records for that single game, one from the point of view of the Vikings and one from the point of view of the Cardinals.  This is important because we want to be able to generalize those stats to other situations by team.  
 
-| season | week | team | game\_id | fumble | safety | tackle | qb\_hit | interception | sack | field_goal|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 2021 | 2 | ARI | 2021\_02\_MIN\_ARI | 3 | 0 | 63 | 4 | 0 | 1 |3|
-| 2021 | 2 | MIN | 2021\_02\_MIN\_ARI | 3 | 0 | 70 | 3 | 2 | 3 | 2|
+| team | fumble | safety | tackle | qb\_hit | interception | sack | field\_goal |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| ARI | 3 | 0 | 63 | 4 | 0 | 1 | 0 |
+| MIN | 3 | 0 | 70 | 3 | 2 | 3 | 0 |
 
 
 <br>
@@ -306,26 +305,26 @@ We want two records for that single game, one from the point of view of the Viki
 
 The player participation dataset contains all the player contribution to a given play.  It stores defense players in one array, and offense players in a second array.  Here's an example of 3 of the defense players for a single play:
 
-| season | game\_id | play | defense_players                       | 
-| :--- | :--- |:-----|:--------------------------------------|
-| 2022 | 2022\_01\_BUF\_LA | 1 |   00-0031787, 00-0035352, 00-0037318 |
+| game\_id | play | defense_players                       | 
+| :--- |:-----|:--------------------------------------|
+| 2022\_01\_BUF\_LA | 1 |   00-0031787, 00-0035352, 00-0037318 |
 
 We want to be able to join, aggregate and count these contributions to the game.  One way to do that is to explode the arrays into separate rows to create our version of the player_participation table.  We can then join this table to the other tables on player_id.  For example, we can get the player information for the defense players in the above example: 
 
 ```sql
-select R.season, R.game_id, R.team, R.player_id, R.lineup,  P.display_name
+select R.game_id, R.team, R.player_id, R.lineup,  P.display_name
 from controls.player_participation R
  join controls.players P on P.player_id=R.player_id
- where R.season=2022 and game_id='2022_01_BUF_LA' and play_id='2022_01_BUF_LA_41' and lineup='defense'
+ where game_id='2022_01_BUF_LA' and play_id='2022_01_BUF_LA_41' and lineup='defense'
  order by play_id
 limit 3
 ```
 
-| season | game\_id | play | team | player\_id | lineup | display\_name |
-| :--- | :--- |:-----|:-----| :--- | :--- | :--- |
-| 2022 | 2022\_01\_BUF\_LA | 1    | BUF  | 00-0031787 | defense | Jake Kumerow |
-| 2022 | 2022\_01\_BUF\_LA | 1    | BUF  | 00-0035352 | defense | Tyrel Dodson |
-| 2022 | 2022\_01\_BUF\_LA | 1    | BUF  | 00-0037318 | defense | Baylon Spector |
+|game\_id | play | team | player\_id | lineup | display\_name |
+|:--- |:-----|:-----| :--- | :--- | :--- |
+|2022\_01\_BUF\_LA | 1    | BUF  | 00-0031787 | defense | Jake Kumerow |
+|2022\_01\_BUF\_LA | 1    | BUF  | 00-0035352 | defense | Tyrel Dodson |
+|2022\_01\_BUF\_LA | 1    | BUF  | 00-0037318 | defense | Baylon Spector |
 
 
 <br>
@@ -425,7 +424,7 @@ def correlate_to_target(df: pd.DataFrame, target_column: str, top_n: int) -> (pd
 
 example offense correlation to win/loss from [Feature selection notebook](../../notebooks/nfl_load_nflverse_feature_selection_demo.ipynb)
 
-<img src="../../images/correlations.png" width="700" height="600" />
+<img src="../.gitbook/assets/NFL/correlations.png" width="700" height="600" />
 
 ### use xgboost to get feature importance
 
@@ -466,7 +465,7 @@ def calc_feature_importance(X: pd.DataFrame, y: pd.Series, top_n=30) -> (pd.Data
 
 example from [Feature selection notebook](../../notebooks/nfl_load_nflverse_feature_selection_demo.ipynb)
 
-<img src="../../images/feature_importance.png" width="700" height="600" />
+<img src="../.gitbook/assets/NFL/feature_importance.png" width="700" height="600" />
 
 
 ### merge the new offense and defense features with the core play-by-play data
@@ -623,7 +622,7 @@ This experiment failed dismally as a network model, so I reran using AutoML and 
 Rather than grinding on this I moved on to the simpler classification model in experiment two to see if this was an issue with the data collected by nflverse or bad modeling or incorrect assumptions. And, during experiment 2 one of the key learnings was that I did not need to curate the data as much as I had.   
 
 <blockquote>
-  <strong>Lesson learned:</strong>  I was over-prepping the data.
+  <strong>Lesson learned:</strong><br>  I was over-prepping the data.
 My original assumption was that placing defensive stats like number of tackles or sacks or QB hits in the same row as offensive stats such as passer rating would confuse the model, so I attempted to roll the stats up into common offense and defense scores that were weighted averages based on the feature importance from xgboost. I then used those scores to offset offense vs defense.  This looked great in the dataset and may be statistically correct, but it was not until I just threw everything together and let the model figure it out that I began to see results.
 </blockquote>
 As a next step I plan to go back and re-run this experiment with less data curation.  
@@ -632,12 +631,12 @@ As a next step I plan to go back and re-run this experiment with less data curat
 
 ## Experiment 2:  Predicting wins and losses
 
-Notebook : [Experiment 2 win/loss classification](../../notebooks/nfl_win_loss_classification.ipynb)
+Notebook : [Experiment 2 win/loss classification](https://github.com/cjlcoursework/nflverse_project/blob/14786c6c93beb48f63fd321036c0f2882376921b/notebooks/nfl_win_loss_classification_experiment2.ipynb)
 
-Lets' be clear. I don't intend to bet any of my hard-earned money on games during the 2023 season using this model.  That's not the goal of this experiment, which is just to see whether we can use nflverse data to predict wins and losses better that a guess, and maybe, maybe, maybe as well as some statistical models, with less effort (and less ingenuity). 
+To be clear I don't intend to bet any of my hard-earned money on games during the 2023 season using this model.  That's not the goal of this experiment, which is just to see whether we can use nflverse data to predict wins and losses better that a guess, and maybe, maybe, maybe as well as some statistical models, with less effort (and less ingenuity). 
 
 ### The model
-The model is simple, but I was surprised that I needed so many layers to get learning.  I did not spend any time perfecting the model or trying to get better results - my goal was just to assess the learning capability given the data.  I used a simple neural network with 7 layers:
+I used a simple neural network with 7 layers.  I did not spend any time perfecting the model or trying to get better results - my goal was just to assess the learning capability given the data:
 
 
 ```python
@@ -674,7 +673,7 @@ validation_split=0.15,
 loss_function='binary_crossentropy'
 ```
 
-The code I used to create and run is here: [team_week_model.py](../../src/models/team_week_model.py)
+The code I used to create and run is here: [src/models/team_week_model.py](https://github.com/cjlcoursework/nflverse_project/blob/14786c6c93beb48f63fd321036c0f2882376921b/src/models/team_week_model.py)
 
 ### The Results
 
@@ -685,7 +684,7 @@ This chart shows how the model learned the data over several iterations (epochs)
 
 - The accuracy metric - how well the model predicted on the validations set - was also ok, but I still have some concern about how high the validation split accuracy started almost immediately, and although it did improve, the improvement was not smooth or deep.  
 
-<img src="../../images/ml_loss_accuracy.png" width="900" height="500" />
+<img src="../.gitbook/assets/NFL/ml_loss_accuracy.png" width="900" height="500" />
 
 ##### The explainer
 The SHAP explainer helps us to understand what features the model learned were important to make predictions. 
@@ -695,7 +694,7 @@ Looking at what the model chose, I think that many of the nflverse features are 
 It might help to explain some of the features seen in the chart:  In order to be able to offset the stats of any two teams I needed to combine their stats together in one record.  That's why we see for example 'carries_aop' and 'carries_hop' - these represent the 'carries' of the **away** team (suffixed by _aop) and the carries of the **home** team (suffixed by _hop) .  The same is true for the defensive stats.  The 'home' and 'away' monikers are not important - they could just as easily been 'my_team', 'your_team', but 'home' and 'away' were easy to implement. The important thing is that the model is able to learn the difference between any two teams and offset the stats accordingly.
 
 
-<img src="../../images/ml_shap.png" width="800" height="600" />
+<img src="../.gitbook/assets/NFL/ml_shap.png" width="800" height="600" />
 
 
 ##### 'Predicting' the 2022 season
@@ -718,5 +717,5 @@ The model is reasonably accurate in that the wins predicted are actually wins (p
 
 The model actually return percentage probabilities of wins and losses, and we use a threshold of 50% to determining whether a row was a win or loss for a given team. In some cases it might be okay to improve the balance between precision and recall by tweaking that threshold, say, setting t to 60%, but in this case I think that would just be overfitting.
 
-<img src="../../images/ml_2022_results.png" width="850" height="600" />
+<img src="../.gitbook/assets/NFL/ml_2022_results.png" width="850" height="600" />
 
