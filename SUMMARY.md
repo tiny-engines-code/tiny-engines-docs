@@ -7,15 +7,18 @@
 * [Personal Website Home](https://chrislomeli.gatsbyjs.io/)
 
 
-## Onboarding Project <a id="sandbox"></a>
+## NFL machine learning capstone
+* [presentation](nfl_capstone/main.md)
+* [proposal](nfl_capstone/project.md)
+* [project structure](nfl_capstone/setup.md)
+* [project workflow](nfl_capstone/workflow.md)
+* [project summary](nfl_capstone/summary.md)
+* [project code](https://github.com/cjlcoursework/nflverse_project)
 
----
+## Onboarding new hires <a id="sandbox"></a>
 
 * [motivation](developer-onboarding/onboarding-intro.md)
 * [the project](developer-onboarding/the-project.md)
-
----
-#### The mailer service
 * [the mailer service](sendgrid-service/code/sendgrid-mailer-intro.md)
   * [mailer setup](sendgrid-service/code/sendgrid-setup.md)
   * [walk-through](sendgrid-service/code/code-review.md)
@@ -32,9 +35,6 @@
   * [performance testing](common/under_contstruction.md)
   * [mutation testing](common/under_contstruction.md)
   * [grammar checking](common/under_contstruction.md)
-
----
-#### The event webhook
 * [the event listener](developer-onboarding/event-activity/001-event-activity-intro.md)
   * [design](developer-onboarding/event-activity/event_activity-design.md)
   * [webhook setup](developer-onboarding/event-activity/event-activity-setup.md)
@@ -46,7 +46,7 @@
 
 ---
 
-### Walk-throughs
+## Walk-throughs
 
 * [spark streaming hld](walkthroughs/ses-transform/01-motivation.md)
   * [background](walkthroughs/ses-transform/02-background.md)
