@@ -1,17 +1,3 @@
-
-
-<div style="background-color: teal; padding: 10px;">
-    <h3 style="color: white;">NFL Machine Learning Proof of Concept</h3>
-</div>
-
-# Project documentation
-
-- [Project](project.md)
-- [Setup](setup.md)
-- [Workflow](workflow.md)
-- [Summary](summary.md)
-
-
 # Table of contents
 - [Introduction](#introduction)
 - [The nflverse data](#the-nflverse-data)
@@ -103,7 +89,7 @@ There are five overall steps to the ETL job:
 - [x] perform feature selection `perform_team_week_feature_selection()` - this job performs feature selection on the data
 - [x] merge the features `merge_team_week_features()` - this job merges the features with the core play-by-play data
 
-<img src="../.gitbook/assets/NFL/NFL/nfl.png" width="1000" height="400" />
+<img src="../.gitbook/assets/NFL/nfl.png" width="1000" height="400" />
 
 These steps slot into two major jobs:
 
@@ -424,7 +410,7 @@ def correlate_to_target(df: pd.DataFrame, target_column: str, top_n: int) -> (pd
 
 example offense correlation to win/loss from [Feature selection notebook](../../notebooks/nfl_load_nflverse_feature_selection_demo.ipynb)
 
-<img src="../.gitbook/assets/NFL/correlations.png" width="700" height="600" />
+<img src="../.gitbook/assets/NFL/correlations.png" width="1000" height="900" />
 
 ### use xgboost to get feature importance
 
@@ -465,7 +451,7 @@ def calc_feature_importance(X: pd.DataFrame, y: pd.Series, top_n=30) -> (pd.Data
 
 example from [Feature selection notebook](../../notebooks/nfl_load_nflverse_feature_selection_demo.ipynb)
 
-<img src="../.gitbook/assets/NFL/feature_importance.png" width="700" height="600" />
+<img src="../.gitbook/assets/NFL/feature_importance.png" width="1000" height="900" />
 
 
 ### merge the new offense and defense features with the core play-by-play data
@@ -684,7 +670,7 @@ This chart shows how the model learned the data over several iterations (epochs)
 
 - The accuracy metric - how well the model predicted on the validations set - was also ok, but I still have some concern about how high the validation split accuracy started almost immediately, and although it did improve, the improvement was not smooth or deep.  
 
-<img src="../.gitbook/assets/NFL/ml_loss_accuracy.png" width="900" height="500" />
+<img src="../.gitbook/assets/NFL/ml_loss_accuracy.png" width="1200" height="600" />
 
 ##### The explainer
 The SHAP explainer helps us to understand what features the model learned were important to make predictions. 
@@ -694,7 +680,7 @@ Looking at what the model chose, I think that many of the nflverse features are 
 It might help to explain some of the features seen in the chart:  In order to be able to offset the stats of any two teams I needed to combine their stats together in one record.  That's why we see for example 'carries_aop' and 'carries_hop' - these represent the 'carries' of the **away** team (suffixed by _aop) and the carries of the **home** team (suffixed by _hop) .  The same is true for the defensive stats.  The 'home' and 'away' monikers are not important - they could just as easily been 'my_team', 'your_team', but 'home' and 'away' were easy to implement. The important thing is that the model is able to learn the difference between any two teams and offset the stats accordingly.
 
 
-<img src="../.gitbook/assets/NFL/ml_shap.png" width="800" height="600" />
+<img src="../.gitbook/assets/NFL/ml_shap.png" width="1100" height="900" />
 
 
 ##### 'Predicting' the 2022 season

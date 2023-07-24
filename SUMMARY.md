@@ -8,7 +8,7 @@
 
 
 ## NFL machine learning capstone
-* [presentation](nfl_capstone/main.md)
+* [project presentation](nfl_capstone/main.md)
 * [proposal](nfl_capstone/project.md)
 * [project structure](nfl_capstone/setup.md)
 * [project workflow](nfl_capstone/workflow.md)
