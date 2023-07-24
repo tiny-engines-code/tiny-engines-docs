@@ -8,12 +8,13 @@
 
 
 ## NFL machine learning capstone
-* [project presentation](nfl_capstone/main.md)
-* [proposal](nfl_capstone/project.md)
-* [project structure](nfl_capstone/setup.md)
-* [project workflow](nfl_capstone/workflow.md)
-* [project summary](nfl_capstone/summary.md)
-* [project code](https://github.com/cjlcoursework/nflverse_project)
+  * [project presentation](nfl_capstone/main.md)
+  * [project proposal](nfl_capstone/project.md)
+  * [project approach](nfl_capstone/approach.md)
+  * [project structure](nfl_capstone/setup.md)
+  * [project workflow](nfl_capstone/workflow.md)
+  * [project summary](nfl_capstone/summary.md)
+  * [project code](https://github.com/cjlcoursework/nflverse_project)
 
 ## Onboarding new hires <a id="sandbox"></a>
 

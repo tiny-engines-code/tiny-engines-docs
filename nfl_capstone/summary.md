@@ -1,16 +1,17 @@
+< [Back](main.md)
+
 <div style="background-color: teal; padding: 10px;">
     <h3 style="color: white;">Conclusion</h3>
 </div>
 <div style="border: 1px solid rgba(13, 74, 102, 0.4); margin: 1px 0;"></div>
 
-< [Back](main.md)
 
 We were able to achieve some success using nflverse data for machine learning.  Using the data for machine learning is therefore feasible. Going one step further to create a more interesting model is not out of the question but would require more effort than we had time for in this POC. 
 
 <br>
 
 <div style="background-color: teal; padding: 10px;">
-    <h3 style="color: white;">Supporting Evidense</h3>
+    <h3 style="color: white;">Supporting Evidence</h3>
 </div>
 
 
@@ -76,6 +77,5 @@ We were able to predict wins and losses with 85%+ accuracy using a simple neural
 
 ##### <font color="#0d4a66">Analysis:</font>
 
-Although the validation loss, accuracy, f1 score, confusion matrix and ROC scores all look good, the SHAP explainer showed that we were learning on features that did not make complete intuitive sense.
-It's likely that the nflverse features that produced the best model are confounded with other features that we did not have in the data.
+The validation loss, accuracy, f1 score, confusion matrix and ROC scores all look good. It's likely that the nflverse features that produced the best model are actually masking other more fundamental properties that are not available in the data.  Whether it's worth trying to find better data is an open issue.
 

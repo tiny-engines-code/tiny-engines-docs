@@ -1,7 +1,3 @@
-<div style="background-color: teal; padding: 5px; margin-top: 2px; margin-bottom: 2px;">
-    <h3 style="color: white;">Project Structure</h3>
-</div>
-
 < [Back](main.md)
 
 The project is structured as follows:
@@ -40,4 +36,5 @@ The project is structured as follows:
 <br>
 
 
-<img src="project_files.png" alt="Project Files" width="1000">
+<img src="../.gitbook/assets/NFL/project_files.png" alt="Project Files" width="1000">
+
